@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import PlaceCard from '../components/placeCard';
+import { MainPageProps } from '../interface/interrface';
 
-const MainPage: FC = () => (
+const MainPage: FC<MainPageProps> = ({ offerCount }) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -84,7 +85,9 @@ const MainPage: FC = () => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">
+              {offerCount} places to stay in Amsterdam
+            </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
