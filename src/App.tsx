@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import MainPage from './pages/mainPage';
 import { MainPageProps } from './interface/interrface';
+import RoutRoot from './router/routerRoot';
 
 const App: FC<MainPageProps> = ({ offerCount }) => (
-  <MainPage offerCount={offerCount} />
+  <RoutRoot offerCount={offerCount} />
 );
 
 export default App;
