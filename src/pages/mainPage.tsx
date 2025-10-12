@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import PlaceCard from '../components/placeCard';
 import { MainPageProps } from '../interface/interrface';
+import OffersList from '../components/offersList';
 
-const MainPage: FC<MainPageProps> = ({ offerCount }) => (
+const MainPage: FC<MainPageProps> = ({ offers }) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -86,7 +86,7 @@ const MainPage: FC<MainPageProps> = ({ offerCount }) => (
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">
-              {offerCount} places to stay in Amsterdam
+              {offers.length} places to stay in Amsterdam
             </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
@@ -115,11 +115,7 @@ const MainPage: FC<MainPageProps> = ({ offerCount }) => (
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
+              <OffersList offers={offers} />
             </div>
           </section>
           <div className="cities__right-section">

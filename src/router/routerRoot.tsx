@@ -8,20 +8,17 @@ import NotFoundPage from '../pages/notFoundPage';
 import { MainPageProps } from '../interface/interrface';
 import ProtectRoute from '../components/protectRoute';
 
-export default function RoutRoot({ offerCount }: MainPageProps) {
+export default function RoutRoot({ offers }: MainPageProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route
           element={
-            <ProtectRoute authorizationStatus={AuthorizationStatus.NoAuth} />
+            <ProtectRoute authorizationStatus={AuthorizationStatus.Auth} />
           }
         >
-          <Route
-            path={AppRoute.Root}
-            element={<MainPage offerCount={offerCount} />}
-          />
+          <Route path={AppRoute.Root} element={<MainPage offers={offers} />} />
           <Route path={AppRoute.Favorites} element={<FavoritesPage />} />
           <Route path={AppRoute.Offer} element={<OfferPage />} />
         </Route>

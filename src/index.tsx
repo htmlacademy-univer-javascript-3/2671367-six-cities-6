@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { offers } from './mocks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const offerCount = 312;
-
 root.render(
   <React.StrictMode>
-    <App offerCount={offerCount} />
+    <App offers={offers} />
   </React.StrictMode>
 );
