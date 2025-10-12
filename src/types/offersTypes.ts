@@ -21,3 +21,5 @@ export type Host = {
   avatarUrl: string;
   isPro: boolean;
 };
+
+export type Offers = Offer[];
