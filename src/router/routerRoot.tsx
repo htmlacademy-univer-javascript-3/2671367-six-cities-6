@@ -19,7 +19,10 @@ export default function RoutRoot({ offers }: MainPageProps) {
           }
         >
           <Route path={AppRoute.Root} element={<MainPage offers={offers} />} />
-          <Route path={AppRoute.Favorites} element={<FavoritesPage />} />
+          <Route
+            path={AppRoute.Favorites}
+            element={<FavoritesPage offers={offers} />}
+          />
           <Route path={AppRoute.Offer} element={<OfferPage />} />
         </Route>
 
