@@ -8,7 +8,7 @@ import NotFoundPage from '../pages/notFoundPage';
 import { AppProps } from '../interface/interface';
 import ProtectRoute from '../components/protectRoute';
 
-export default function RoutRoot({ offers, reviews }: AppProps) {
+export default function RoutRoot({ offers, reviews, nearOffers }: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -25,7 +25,7 @@ export default function RoutRoot({ offers, reviews }: AppProps) {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage reviews={reviews} />}
+            element={<OfferPage reviews={reviews} nearOffers={nearOffers} />}
           />
         </Route>
 

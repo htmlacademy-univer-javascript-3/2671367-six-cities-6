@@ -35,11 +35,12 @@ export interface ReviewListProps {
 
 export interface OffersPageProps {
   reviews: Reviews;
-  offers: Offers;
+  nearOffers: Offers;
 }
 
 export interface AppProps {
   offers: Offers;
+  nearOffers: Offers;
   reviews: Reviews;
 }
 
