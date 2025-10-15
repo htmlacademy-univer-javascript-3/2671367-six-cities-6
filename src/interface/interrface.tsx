@@ -1,5 +1,6 @@
 import { AuthorizationStatus } from '../consts';
 import { City, Offer, Offers } from '../types/offersTypes';
+import { Review } from '../types/reviewTypes';
 
 export interface MainPageProps {
   offers: Offers;
@@ -22,4 +23,11 @@ export interface MapProps {
   offers: Offer[];
   selectedOfferId?: string;
   className?: string;
+}
+export interface ReviewProps {
+  review: Review;
+}
+
+export interface ReviewListProps {
+  reviews: Review[];
 }
