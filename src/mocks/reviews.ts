@@ -16,7 +16,7 @@ export const reviews: Review[] = [
     id: '2',
     user: {
       name: 'Anna',
-      avatarUrl: 'iimg/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
     },
     rating: 5,
     comment:
