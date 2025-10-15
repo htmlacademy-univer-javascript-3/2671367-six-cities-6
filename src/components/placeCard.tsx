@@ -1,15 +1,20 @@
 import { FC } from 'react';
-import { PlaceCardProps } from '../interface/interface';
+import { PlaceCardProps, VariantProps } from '../interface/interface';
 import { Link } from 'react-router-dom';
 
-const PlaceCard: FC<PlaceCardProps> = ({ offer }) => (
-  <article className="cities__card place-card">
+export interface ExtendedPlaceCardProps extends PlaceCardProps, VariantProps {}
+
+const PlaceCard: FC<ExtendedPlaceCardProps> = ({
+  offer,
+  variant: block = 'cities',
+}) => (
+  <article className={`${block}__card place-card`}>
     {offer.isPremium && (
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
     )}
-    <div className="place-card__image-wrapper">
+    <div className={`${block}__image-wrapper place-card__image-wrapper`}>
       <a href="#">
         <img
           className="place-card__image"
@@ -35,7 +40,9 @@ const PlaceCard: FC<PlaceCardProps> = ({ offer }) => (
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
-          <span className="visually-hidden">To bookmarks</span>
+          <span className="visually-hidden">
+            {offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}
+          </span>
         </button>
       </div>
       <div className="place-card__rating rating">

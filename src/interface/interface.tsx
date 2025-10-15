@@ -35,9 +35,14 @@ export interface ReviewListProps {
 
 export interface OffersPageProps {
   reviews: Reviews;
+  offers: Offers;
 }
 
 export interface AppProps {
   offers: Offers;
   reviews: Reviews;
+}
+
+export interface VariantProps {
+  variant?: 'cities' | 'near-places';
 }
