@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ReviewListProps } from '../interface/interrface';
+import { ReviewListProps } from '../interface/interface';
 import { Review } from './review';
 
 export const ReviewList: FC<ReviewListProps> = ({ reviews }) => (

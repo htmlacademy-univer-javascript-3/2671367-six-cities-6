@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { MainPageProps } from '../interface/interrface';
+import { MainPageProps } from '../interface/interface';
 import OffersList from '../components/offersList';
 import Map from '../components/map';
 

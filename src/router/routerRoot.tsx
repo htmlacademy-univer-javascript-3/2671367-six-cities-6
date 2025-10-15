@@ -5,7 +5,7 @@ import LoginPage from '../pages/loginPage';
 import FavoritesPage from '../pages/favoritesPage';
 import OfferPage from '../pages/offerPage';
 import NotFoundPage from '../pages/notFoundPage';
-import { MainPageProps } from '../interface/interrface';
+import { MainPageProps } from '../interface/interface';
 import ProtectRoute from '../components/protectRoute';
 
 export default function RoutRoot({ offers }: MainPageProps) {

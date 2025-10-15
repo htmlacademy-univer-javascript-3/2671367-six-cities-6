@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { PlaceCardProps } from '../interface/interrface';
+import { PlaceCardProps } from '../interface/interface';
 import { Link } from 'react-router-dom';
 
 const PlaceCard: FC<PlaceCardProps> = ({ offer }) => (

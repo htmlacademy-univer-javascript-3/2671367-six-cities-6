@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { OffersListProps } from '../interface/interrface';
+import { OffersListProps } from '../interface/interface';
 import PlaceCard from './placeCard';
 
 const OffersList: FC<OffersListProps> = ({ offers }) => (

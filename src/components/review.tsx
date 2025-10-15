@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { ReviewProps } from '../interface/interrface';
-
+import { ReviewProps } from '../interface/interface';
 export const Review: FC<ReviewProps> = ({ review }) => (
   <li className="reviews__item">
     <div className="reviews__user user">
@@ -24,11 +23,18 @@ export const Review: FC<ReviewProps> = ({ review }) => (
       </div>
       <p className="reviews__text">{review.comment}</p>
       <time className="reviews__time" dateTime={review.date}>
-        {new Date(review.date).toLocaleString('en-US', {
-          month: 'long',
-          year: 'numeric',
-        })}
-      </time>
+        {(() => {
+          try {
+            return new Date(review.date).toLocaleString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            });
+          } catch {
+            return 'Invalid date';
+          }
+        })()}
+      </time>{' '}
     </div>
   </li>
 );
