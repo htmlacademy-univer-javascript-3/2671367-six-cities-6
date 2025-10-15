@@ -39,7 +39,15 @@ export const offers: Offer[] = [
     },
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    city: 'Amsterdam',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+    },
   },
   {
     id: '2',
@@ -61,7 +69,15 @@ export const offers: Offer[] = [
     },
     description:
       'A cozy private room in the heart of the city. Perfect for solo travelers or couples.',
-    city: 'Amsterdam',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198,
+    },
   },
   {
     id: '3',
@@ -83,7 +99,15 @@ export const offers: Offer[] = [
     },
     description:
       'Spacious apartment with a beautiful canal view. Enjoy the city from your window.',
-    city: 'Amsterdam',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.939309666406198,
+    },
   },
   {
     id: '4',
@@ -115,6 +139,14 @@ export const offers: Offer[] = [
     },
     description:
       'A nice and cozy apartment with a big bed. Perfect for families and groups.',
-    city: 'Amsterdam',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
+    },
   },
 ];
