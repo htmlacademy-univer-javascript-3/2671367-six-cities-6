@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import { MainPageProps } from './interface/interface';
+import { AppProps } from './interface/interface';
 import RoutRoot from './router/routerRoot';
 
-const App: FC<MainPageProps> = ({ offers }) => <RoutRoot offers={offers} />;
+const App: FC<AppProps> = ({ offers, reviews }) => (
+  <RoutRoot offers={offers} reviews={reviews} />
+);
 
 export default App;
