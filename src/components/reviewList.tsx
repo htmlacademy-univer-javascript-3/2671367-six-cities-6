@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { ReviewListProps } from '../interface/interface';
 import { Review } from './review';
+import { CommentForm } from './commentForm';
 
 export const ReviewList: FC<ReviewListProps> = ({ reviews }) => (
   <section className="offer__reviews reviews">
@@ -12,5 +13,6 @@ export const ReviewList: FC<ReviewListProps> = ({ reviews }) => (
         <Review key={review.id} review={review} />
       ))}
     </ul>
+    <CommentForm />
   </section>
 );
