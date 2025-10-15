@@ -18,3 +18,6 @@ export enum RatingTitle {
   Badly = 'badly',
   Terribly = 'terribly',
 }
+
+export const URL_MARKER_LOCATION =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
