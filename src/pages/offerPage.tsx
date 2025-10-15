@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { ReviewList } from '../components/reviewList';
 import { OffersPageProps } from '../interface/interface';
 import OffersList from '../components/offersList';
+import Map from '../components/map';
 
 const OfferPage: FC<OffersPageProps> = ({ reviews, nearOffers }) => (
   <div className="page">
@@ -176,7 +177,11 @@ const OfferPage: FC<OffersPageProps> = ({ reviews, nearOffers }) => (
             <ReviewList reviews={reviews} />
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <Map
+          className="offer__map map"
+          city={nearOffers[0].city}
+          offers={nearOffers}
+        />
       </section>
       <div className="container">
         <section className="near-places places">

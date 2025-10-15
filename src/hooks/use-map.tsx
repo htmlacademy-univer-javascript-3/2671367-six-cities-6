@@ -8,12 +8,13 @@ function useMap(
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
+  const ZOOM = 12;
 
   useEffect(() => {
     if (mapRef.current && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: { lat: city.lat, lng: city.lng },
-        zoom: 10,
+        zoom: ZOOM,
       });
 
       const layer = new TileLayer(
@@ -32,7 +33,7 @@ function useMap(
 
   useEffect(() => {
     if (map) {
-      map.setView({ lat: city.lat, lng: city.lng }, 10);
+      map.setView({ lat: city.lat, lng: city.lng }, ZOOM);
     }
   }, [map, city]);
 
