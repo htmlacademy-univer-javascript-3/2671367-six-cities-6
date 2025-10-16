@@ -1,0 +1,112 @@
+import { Offer } from '../types/offersTypes';
+
+export const nearOffers: Offer[] = [
+  {
+    id: '1',
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'Apartment',
+    price: 120,
+    rating: 4,
+    isPremium: true,
+    isFavorite: false,
+    previewImage: 'img/apartment-01.jpg',
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/apartment-01.jpg',
+    ],
+    bedrooms: 3,
+    maxAdults: 4,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cable TV',
+      'Fridge',
+    ],
+    host: {
+      name: 'Angelina',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true,
+    },
+    description:
+      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+    },
+  },
+  {
+    id: '2',
+    title: 'Wood and stone place',
+    type: 'Private room',
+    price: 80,
+    rating: 3,
+    isPremium: false,
+    isFavorite: true,
+    previewImage: 'img/room.jpg',
+    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg'],
+    bedrooms: 1,
+    maxAdults: 2,
+    goods: ['Wi-Fi', 'Heating', 'Kitchen', 'Fridge'],
+    host: {
+      name: 'Max',
+      avatarUrl: 'img/avatar-max.jpg',
+      isPro: false,
+    },
+    description:
+      'A cozy private room in the heart of the city. Perfect for solo travelers or couples.',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198,
+    },
+  },
+  {
+    id: '3',
+    title: 'Canal View Prinsengracht',
+    type: 'Apartment',
+    price: 132,
+    rating: 4,
+    isPremium: false,
+    isFavorite: false,
+    previewImage: 'img/apartment-02.jpg',
+    images: ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/room.jpg'],
+    bedrooms: 2,
+    maxAdults: 3,
+    goods: ['Wi-Fi', 'Kitchen', 'Cable TV', 'Fridge'],
+    host: {
+      name: 'Anna',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true,
+    },
+    description:
+      'Spacious apartment with a beautiful canal view. Enjoy the city from your window.',
+    city: {
+      name: 'Amsterdam',
+      lat: 52.377956,
+      lng: 4.89707,
+    },
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.939309666406198,
+    },
+  },
+];

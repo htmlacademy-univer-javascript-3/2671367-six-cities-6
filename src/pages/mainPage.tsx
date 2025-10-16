@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { MainPageProps } from '../interface/interrface';
+import { MainPageProps } from '../interface/interface';
 import OffersList from '../components/offersList';
 import Map from '../components/map';
 
@@ -116,7 +116,7 @@ const MainPage: FC<MainPageProps> = ({ offers }) => (
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <OffersList offers={offers} />
+              <OffersList offers={offers} variant="cities" />
             </div>
           </section>
           <div className="cities__right-section">

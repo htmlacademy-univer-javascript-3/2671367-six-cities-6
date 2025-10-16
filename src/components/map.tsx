@@ -3,7 +3,7 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../hooks/use-map';
 import { URL_MARKER_LOCATION } from '../consts';
 import 'leaflet/dist/leaflet.css';
-import { MapProps } from '../interface/interrface';
+import { MapProps } from '../interface/interface';
 
 const locationIcon = new Icon({
   iconUrl: URL_MARKER_LOCATION,

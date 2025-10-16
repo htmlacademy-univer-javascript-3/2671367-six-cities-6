@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import OffersList from '../components/offersList';
-import { OffersListProps } from '../interface/interrface';
+import { OffersListProps } from '../interface/interface';
 
 const FavoritesPage: FC<OffersListProps> = ({ offers }) => (
   <div className="page">
