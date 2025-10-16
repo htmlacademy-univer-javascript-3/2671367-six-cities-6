@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { MainPageProps } from '../interface/interrface';
 import OffersList from '../components/offersList';
+import Map from '../components/map';
 
 const MainPage: FC<MainPageProps> = ({ offers }) => (
   <div className="page page--gray page--main">
@@ -119,7 +120,11 @@ const MainPage: FC<MainPageProps> = ({ offers }) => (
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map
+              className="cities__map map"
+              city={offers[0].city}
+              offers={offers}
+            />
           </div>
         </div>
       </div>

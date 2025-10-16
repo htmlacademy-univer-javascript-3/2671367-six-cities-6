@@ -1,5 +1,5 @@
 import { AuthorizationStatus } from '../consts';
-import { Offer, Offers } from '../types/offersTypes';
+import { City, Offer, Offers } from '../types/offersTypes';
 
 export interface MainPageProps {
   offers: Offers;
@@ -15,4 +15,11 @@ export interface PlaceCardProps {
 
 export interface OffersListProps {
   offers: Offers;
+}
+
+export interface MapProps {
+  city: City;
+  offers: Offer[];
+  selectedOfferId?: string;
+  className?: string;
 }

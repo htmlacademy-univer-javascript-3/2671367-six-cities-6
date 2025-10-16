@@ -13,13 +13,25 @@ export type Offer = {
   goods: string[];
   host: Host;
   description: string;
-  city: string;
+  city: City;
+  location: location;
 };
 
 export type Host = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
+};
+
+export type City = {
+  name: string;
+  lat: number;
+  lng: number;
+};
+
+export type location = {
+  lat: number;
+  lng: number;
 };
 
 export type Offers = Offer[];
