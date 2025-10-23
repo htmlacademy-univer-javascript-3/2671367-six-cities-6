@@ -1,10 +1,7 @@
 import { AuthorizationStatus } from '../consts';
-import { City, Offer, Offers } from '../types/offersTypes';
+import { Cities, City } from '../types/cityTypes';
+import { Offer, Offers } from '../types/offersTypes';
 import { Review, Reviews } from '../types/reviewTypes';
-
-export interface MainPageProps {
-  offers: Offers;
-}
 
 export interface AuthProps {
   authorizationStatus: AuthorizationStatus;
@@ -32,18 +29,12 @@ export interface ReviewProps {
 export interface ReviewListProps {
   reviews: Reviews;
 }
-
-export interface OffersPageProps {
-  reviews: Reviews;
-  nearOffers: Offers;
-}
-
-export interface AppProps {
-  offers: Offers;
-  nearOffers: Offers;
-  reviews: Reviews;
-}
-
 export interface VariantProps {
   variant?: 'cities' | 'near-places';
+}
+
+export interface CitiesListProps {
+  cities: Cities;
+  currentCity: City;
+  onClick: (city: City) => void;
 }

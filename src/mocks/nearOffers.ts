@@ -1,6 +1,6 @@
-import { Offer } from '../types/offersTypes';
+import { Offers } from '../types/offersTypes';
 
-export const nearOffers: Offer[] = [
+export const nearOffers: Offers = [
   {
     id: '1',
     title: 'Beautiful & luxurious studio at great location',
