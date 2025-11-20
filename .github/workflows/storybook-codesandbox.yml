@@ -1,0 +1,31 @@
+name: Comment CodeSandbox Link
+
+on:
+    workflow_run:
+        workflows:
+            - Build
+        types:
+            - completed
+
+jobs:
+    comment_codesandbox:
+        runs-on: ubuntu-latest
+
+        if: >
+            github.event.workflow_run.conclusion == 'success' &&
+            github.event.workflow_run.event == 'pull_request'
+
+        steps:
+            - name: Extract PR number
+              run: |
+                  echo "PR=$(cat env | grep 'prev.event.number' | awk -F '=' '{print $2}')" >> $GITHUB_ENV
+
+            - name: Add CodeSandbox comment
+              uses: thollander/actions-comment-pull-request@v2
+              with:
+                  pr_number: ${{ env.PR }}
+                  message: |
+                      ## CodeSandbox Preview
+                      [![Open in CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/${{ github.event.workflow_run.head_repository.full_name }}/${{ github.event.workflow_run.head_branch }})
+
+                      ## Chromatic Storybook
