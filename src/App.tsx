@@ -1,9 +1,16 @@
-import { FC } from 'react';
-import { AppProps } from './interface/interface';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { initData } from './store/action';
 import RoutRoot from './router/routerRoot';
 
-const App: FC<AppProps> = ({ offers, reviews, nearOffers }) => (
-  <RoutRoot offers={offers} reviews={reviews} nearOffers={nearOffers} />
-);
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initData());
+  }, [dispatch]);
+
+  return <RoutRoot />;
+};
 
 export default App;

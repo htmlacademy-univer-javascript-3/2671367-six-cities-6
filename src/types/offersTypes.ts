@@ -1,3 +1,5 @@
+import { City } from './cityTypes';
+
 export type Offer = {
   id: string;
   title: string;
@@ -21,12 +23,6 @@ export type Host = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
-};
-
-export type City = {
-  name: string;
-  lat: number;
-  lng: number;
 };
 
 export type location = {
