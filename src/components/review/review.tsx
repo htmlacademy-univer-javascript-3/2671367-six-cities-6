@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ReviewProps } from '../interface/interface';
+import { ReviewProps } from '../../interface/interface';
 export const Review: FC<ReviewProps> = ({ review }) => (
   <li className="reviews__item">
     <div className="reviews__user user">

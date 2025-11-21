@@ -5,25 +5,40 @@ import {
   selectOffers,
   selectCities,
   selectCurrentCity,
+  selectSortBy,
 } from '../store/selectors';
-import OffersList from '../components/offersList';
-import Map from '../components/map';
-import { CitiesList } from '../components/citiesList';
+import OffersList from '../components/offersList/offersList';
+import Map from '../components/map/map';
+import { CitiesList } from '../components/citiesList/citiesList';
 import { City } from '../types/cityTypes';
+import { SortSelector } from '../components/sortSelector/sortSelector';
 
 const MainPage: FC = () => {
   const dispatch = useDispatch();
   const offers = useSelector(selectOffers);
   const cities = useSelector(selectCities);
   const currentCity = useSelector(selectCurrentCity);
+  const sortBy = useSelector(selectSortBy);
+
+  const filteredOffers = offers
+    .filter((offer) => offer.city.name === currentCity.name)
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'price-asc':
+          return a.price - b.price;
+        case 'price-desc':
+          return b.price - a.price;
+        case 'top-desc':
+          return b.rating - a.rating;
+        case 'popular-desc':
+        default:
+          return 0;
+      }
+    });
 
   const handleCityChange = (city: City) => {
     dispatch(changeCity(city));
   };
-
-  const filteredOffers = offers.filter(
-    (offer) => offer.city.name === currentCity.name
-  );
 
   return (
     <div className="page page--gray page--main">
@@ -79,7 +94,7 @@ const MainPage: FC = () => {
               <b className="places__found">
                 {filteredOffers.length} places to stay in {currentCity.name}
               </b>
-
+              <SortSelector />
               <div className="cities__places-list places__list tabs__content">
                 <OffersList offers={filteredOffers} variant="cities" />
               </div>

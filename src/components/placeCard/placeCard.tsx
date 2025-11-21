@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { PlaceCardProps, VariantProps } from '../interface/interface';
+import { PlaceCardProps, VariantProps } from '../../interface/interface';
 import { Link } from 'react-router-dom';
 
 export interface ExtendedPlaceCardProps extends PlaceCardProps, VariantProps {}

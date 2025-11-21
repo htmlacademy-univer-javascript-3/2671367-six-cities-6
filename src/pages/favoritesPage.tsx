@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import OffersList from '../components/offersList';
+import OffersList from '../components/offersList/offersList';
 import { useSelector } from 'react-redux';
 import { selectOffers } from '../store/selectors';
 

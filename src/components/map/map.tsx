@@ -1,9 +1,9 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import useMap from '../hooks/use-map';
-import { URL_MARKER_LOCATION } from '../consts';
+import useMap from '../../hooks/use-map';
+import { URL_MARKER_LOCATION } from '../../consts';
 import 'leaflet/dist/leaflet.css';
-import { MapProps } from '../interface/interface';
+import { MapProps } from '../../interface/interface';
 
 const locationIcon = new Icon({
   iconUrl: URL_MARKER_LOCATION,
@@ -41,7 +41,13 @@ function Map({
     };
   }, [map, offers, selectedOfferId]);
 
-  return <div className={className} ref={mapRef} />;
+  return (
+    <div
+      className={className}
+      ref={mapRef}
+      style={{ width: '100%', height: '100%' }}
+    />
+  );
 }
 
 export default Map;
