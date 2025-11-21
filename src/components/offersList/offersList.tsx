@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { OffersListProps, VariantProps } from '../interface/interface';
-import PlaceCard from './placeCard';
+import { OffersListProps, VariantProps } from '../../interface/interface';
+import PlaceCard from '../placeCard/placeCard';
 
 interface ExtendedOffersListProps extends OffersListProps, VariantProps {}
 
