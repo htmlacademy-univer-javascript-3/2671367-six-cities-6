@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CitiesListProps } from '../interface/interface';
+import { CitiesListProps } from '../../interface/interface';
 
 export const CitiesList: FC<CitiesListProps> = ({
   cities,
