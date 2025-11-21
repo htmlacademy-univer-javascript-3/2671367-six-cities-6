@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Offers } from '../types/offersTypes';
 import { City, Cities } from '../types/cityTypes';
-import { changeCity, fillOffers, initData } from './action';
+import { changeCity, changeSort, fillOffers, initData } from './action';
 import { offers } from '../mocks/offers';
 import { cities } from '../mocks/cities';
 import { Reviews } from '../types/reviewTypes';
@@ -14,6 +14,7 @@ type OfferState = {
   reviews: Reviews;
   nearOffers: Offers;
   cities: Cities;
+  sortBy: string;
 };
 
 const initialState: OfferState = {
@@ -22,6 +23,7 @@ const initialState: OfferState = {
   reviews: [],
   nearOffers: [],
   cities: [],
+  sortBy: 'popular-desc',
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -37,5 +39,8 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = offers;
       state.nearOffers = nearOffers;
       state.reviews = reviews;
+    })
+    .addCase(changeSort, (state, action) => {
+      state.sortBy = action.payload;
     });
 });
