@@ -2,6 +2,8 @@
 
 - Студент: [Алексей Бисмус](https://up.htmlacademy.ru/univer-js3/6/user/2671367).
 - Наставник: `Андрей Осипук`.
+- CodeSandbox Preview: [Ckick in me!](https://codesandbox.io/p/github/bismus-le-sha/six-cities/master)
+- Chromatic Lib: [Yah, press on me!](https://www.chromatic.com/library?appId=691edf3e1685e88bd982f1e3)
 
 ---
 
