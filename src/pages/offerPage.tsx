@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { ReviewList } from '../components/reviewList';
-import OffersList from '../components/offersList';
-import Map from '../components/map';
+import { ReviewList } from '../components/rewievList/reviewList';
+import OffersList from '../components/offersList/offersList';
+import Map from '../components/map/map';
 import { useSelector } from 'react-redux';
 import { selectNearOffers, selectReviews } from '../store/selectors';
 

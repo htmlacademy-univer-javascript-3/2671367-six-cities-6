@@ -6,9 +6,9 @@ import {
   selectCities,
   selectCurrentCity,
 } from '../store/selectors';
-import OffersList from '../components/offersList';
-import Map from '../components/map';
-import { CitiesList } from '../components/citiesList';
+import OffersList from '../components/offersList/offersList';
+import Map from '../components/map/map';
+import { CitiesList } from '../components/citiesList/citiesList';
 import { City } from '../types/cityTypes';
 
 const MainPage: FC = () => {
