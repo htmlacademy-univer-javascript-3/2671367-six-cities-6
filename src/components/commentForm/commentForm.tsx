@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import type { ChangeEvent, FC, FormEvent } from 'react';
-import { RatingTitle } from '../consts';
+import { RatingTitle } from '../../consts';
 
 const RATING_VALUES = [5, 4, 3, 2, 1];
 
