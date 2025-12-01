@@ -1,4 +1,4 @@
-import { Offer } from '../types/offersTypes';
+import { Offer } from '../models/offer/types/offerTypes';
 
 export const offers: Offer[] = [
   {
@@ -41,8 +41,7 @@ export const offers: Offer[] = [
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
     city: {
       name: 'Amsterdam',
-      lat: 52.377956,
-      lng: 4.89707,
+      location: { lat: 52.377956, lng: 4.89707 },
     },
     location: {
       lat: 52.3909553943508,
@@ -71,8 +70,7 @@ export const offers: Offer[] = [
       'A cozy private room in the heart of the city. Perfect for solo travelers or couples.',
     city: {
       name: 'Amsterdam',
-      lat: 52.377956,
-      lng: 4.89707,
+      location: { lat: 52.377956, lng: 4.89707 },
     },
     location: {
       lat: 52.3609553943508,
@@ -101,8 +99,7 @@ export const offers: Offer[] = [
       'Spacious apartment with a beautiful canal view. Enjoy the city from your window.',
     city: {
       name: 'Amsterdam',
-      lat: 52.377956,
-      lng: 4.89707,
+      location: { lat: 52.377956, lng: 4.89707 },
     },
     location: {
       lat: 52.3909553943508,
@@ -141,8 +138,7 @@ export const offers: Offer[] = [
       'A nice and cozy apartment with a big bed. Perfect for families and groups.',
     city: {
       name: 'Amsterdam',
-      lat: 52.377956,
-      lng: 4.89707,
+      location: { lat: 52.377956, lng: 4.89707 },
     },
     location: {
       lat: 52.3809553943508,

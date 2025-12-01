@@ -1,4 +1,4 @@
-import { SortSelectorUI } from './SortSelectorUI';
+import { SortSelectorUI } from './sortSelectorUI';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { changeSort } from '../../store/action';

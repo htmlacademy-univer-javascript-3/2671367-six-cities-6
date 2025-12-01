@@ -1,7 +1,8 @@
 import { AuthorizationStatus } from '../consts';
-import { Cities, City } from '../types/cityTypes';
-import { Offer, Offers } from '../types/offersTypes';
-import { Review, Reviews } from '../types/reviewTypes';
+import { City } from '../models/city/types/cityTypes';
+import { ERROR_TYPE } from '../types/errorTypes';
+import { Offer } from '../models/offer/types/offerTypes';
+import { Review } from '../models/review/types/reviewTypes';
 
 export interface AuthProps {
   authorizationStatus: AuthorizationStatus;
@@ -12,12 +13,12 @@ export interface PlaceCardProps {
 }
 
 export interface OffersListProps {
-  offers: Offers;
+  offers: Offer[];
 }
 
 export interface MapProps {
   city: City;
-  offers: Offers;
+  offers: Offer[];
   selectedOfferId?: string;
   className?: string;
 }
@@ -27,14 +28,26 @@ export interface ReviewProps {
 }
 
 export interface ReviewListProps {
-  reviews: Reviews;
+  reviews: Review[];
 }
 export interface VariantProps {
   variant?: 'cities' | 'near-places';
 }
 
 export interface CitiesListProps {
-  cities: Cities;
+  cities: City[];
   currentCity: City;
   onClick: (city: City) => void;
+}
+
+interface ServerErrorDetail {
+  property: string;
+  value: string;
+  messages: string[];
+}
+
+export interface ServerError {
+  errorType: ERROR_TYPE;
+  message: string;
+  details: ServerErrorDetail[];
 }

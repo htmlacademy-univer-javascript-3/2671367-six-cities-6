@@ -10,7 +10,7 @@ import {
 import OffersList from '../components/offersList/offersList';
 import Map from '../components/map/map';
 import { CitiesList } from '../components/citiesList/citiesList';
-import { City } from '../types/cityTypes';
+import { City } from '../models/city/types/cityTypes';
 import { SortSelector } from '../components/sortSelector/sortSelector';
 
 const MainPage: FC = () => {

@@ -1,19 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Offers } from '../types/offersTypes';
-import { City, Cities } from '../types/cityTypes';
+import { Offer } from '../models/offer/types/offerTypes';
+import { City } from '../models/city/types/cityTypes';
 import { changeCity, changeSort, fillOffers, initData } from './action';
 import { offers } from '../mocks/offers';
 import { cities } from '../mocks/cities';
-import { Reviews } from '../types/reviewTypes';
+import { Review } from '../models/review/types/reviewTypes';
 import { reviews } from '../mocks/reviews';
 import { nearOffers } from '../mocks/nearOffers';
 
 type OfferState = {
   city: City;
-  offers: Offers;
-  reviews: Reviews;
-  nearOffers: Offers;
-  cities: Cities;
+  offers: Offer[];
+  reviews: Review[];
+  nearOffers: Offer[];
+  cities: City[];
   sortBy: string;
 };
 
