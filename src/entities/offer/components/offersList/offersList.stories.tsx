@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import OffersList from './offersList';
 import { offers } from '../../../../mocks/offers';
+import { OffersList } from '../..';
 
 const meta: Meta<typeof OffersList> = {
   title: 'Components/OffersList',

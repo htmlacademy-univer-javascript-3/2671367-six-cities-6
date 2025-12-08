@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ReviewComnponent } from './review';
-import { ReviewProps } from '../../interface/interface';
+import { ReviewProps } from '../../../../interface/interface';
 
 const meta: Meta<typeof ReviewComnponent> = {
   title: 'Components/Review',
@@ -16,6 +16,7 @@ const mockReview: ReviewProps['review'] = {
   user: {
     name: 'Max',
     avatarUrl: 'https://i.pravatar.cc/54?img=3',
+    isPro: true,
   },
   rating: 4,
   comment: 'Great apartment, very clean and well located.',
