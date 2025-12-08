@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import css from './Loader.module.css';
+import css from './loader.module.css';
 
 interface LoaderProps {
   size?: number;
