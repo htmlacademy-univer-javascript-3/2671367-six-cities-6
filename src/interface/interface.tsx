@@ -1,8 +1,9 @@
 import { AuthorizationStatus } from '../consts';
-import { City } from '../models/city/types/cityTypes';
+import { City } from '../entities/city/model/cityTypes';
 import { ERROR_TYPE } from '../types/errorTypes';
-import { Offer } from '../models/offer/types/offerTypes';
-import { Review } from '../models/review/types/reviewTypes';
+import { Offer } from '../entities/offer/model/offerTypes';
+import { Review } from '../entities/review/model/reviewTypes';
+import { Location } from '../entities/location/index';
 
 export interface AuthProps {
   authorizationStatus: AuthorizationStatus;
@@ -17,7 +18,7 @@ export interface OffersListProps {
 }
 
 export interface MapProps {
-  city: City;
+  location: Location;
   offers: Offer[];
   selectedOfferId?: string;
   className?: string;

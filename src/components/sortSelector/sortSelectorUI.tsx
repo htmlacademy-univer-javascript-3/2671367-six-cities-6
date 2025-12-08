@@ -1,6 +1,6 @@
 import { FC, memo, useState, useRef } from 'react';
 import cn from 'classnames';
-import { useOutClick } from '../../hooks/use-out-click';
+import { useOutClick } from '../../shared/hooks/use-out-click';
 
 interface Option {
   label: string;

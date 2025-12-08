@@ -1,4 +1,4 @@
-import { Review } from '../models/review/types/reviewTypes';
+import { Review } from '../entities/review';
 
 export const reviews: Review[] = [
   {

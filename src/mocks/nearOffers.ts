@@ -1,10 +1,11 @@
-import { Offer } from '../models/offer/types/offerTypes';
+import { CityName } from '../entities/city';
+import { OfferDetails } from '../entities/offer/model/offerTypes';
 
-export const nearOffers: Offer[] = [
+export const nearOffersMoc: OfferDetails[] = [
   {
     id: '1',
     title: 'Beautiful & luxurious studio at great location',
-    type: 'Apartment',
+    type: 'apartment',
     price: 120,
     rating: 4,
     isPremium: true,
@@ -40,18 +41,18 @@ export const nearOffers: Offer[] = [
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
     city: {
-      name: 'Amsterdam',
-      location: { lat: 52.377956, lng: 4.89707 },
+      name: CityName.Amsterdam,
+      location: { latitude: 52.377956, longitude: 4.89707 },
     },
     location: {
-      lat: 52.3909553943508,
-      lng: 4.85309666406198,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
     },
   },
   {
     id: '2',
     title: 'Wood and stone place',
-    type: 'Private room',
+    type: 'room',
     price: 80,
     rating: 3,
     isPremium: false,
@@ -69,18 +70,18 @@ export const nearOffers: Offer[] = [
     description:
       'A cozy private room in the heart of the city. Perfect for solo travelers or couples.',
     city: {
-      name: 'Amsterdam',
-      location: { lat: 52.377956, lng: 4.89707 },
+      name: CityName.Amsterdam,
+      location: { latitude: 52.377956, longitude: 4.89707 },
     },
     location: {
-      lat: 52.3609553943508,
-      lng: 4.85309666406198,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
     },
   },
   {
     id: '3',
     title: 'Canal View Prinsengracht',
-    type: 'Apartment',
+    type: 'apartment',
     price: 132,
     rating: 4,
     isPremium: false,
@@ -98,12 +99,12 @@ export const nearOffers: Offer[] = [
     description:
       'Spacious apartment with a beautiful canal view. Enjoy the city from your window.',
     city: {
-      name: 'Amsterdam',
-      location: { lat: 52.377956, lng: 4.89707 },
+      name: CityName.Amsterdam,
+      location: { latitude: 52.377956, longitude: 4.89707 },
     },
     location: {
-      lat: 52.3909553943508,
-      lng: 4.939309666406198,
+      latitude: 52.3909553943508,
+      longitude: 4.939309666406198,
     },
   },
 ];
