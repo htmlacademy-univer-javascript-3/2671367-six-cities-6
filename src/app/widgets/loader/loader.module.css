@@ -1,0 +1,32 @@
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #e0e0e0 0deg,
+    #e0e0e0 120deg,
+    #1e90ff 120deg,
+    #1e90ff 360deg
+  );
+  -webkit-mask: radial-gradient(
+    circle 60% at center,
+    transparent 55%,
+    black 56%
+  );
+  mask: radial-gradient(circle 60% at center, transparent 55%, black 56%);
+  animation: rotation 0.9s linear infinite;
+}
+
+.fullscreen {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
+}

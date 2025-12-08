@@ -1,24 +1,31 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
-import useMap from '../../hooks/use-map';
-import { URL_MARKER_LOCATION } from '../../consts';
+
 import 'leaflet/dist/leaflet.css';
 import { MapProps } from '../../interface/interface';
+import useMap from '../../shared/hooks/useMap';
+import { URL_MARKER_DEFAULT } from './mapConst';
 
 const locationIcon = new Icon({
-  iconUrl: URL_MARKER_LOCATION,
+  iconUrl: URL_MARKER_DEFAULT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
+// const locationCurrentIcon = new Icon({
+//   iconUrl: URL_MARKER_CURRENT,
+//   iconSize: [40, 40],
+//   iconAnchor: [20, 40],
+// });
+
 function Map({
-  city,
+  location,
   offers,
   selectedOfferId,
   className,
 }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, location);
 
   useEffect(() => {
     if (!map) {
@@ -28,16 +35,17 @@ function Map({
     const markerLayer = layerGroup().addTo(map);
 
     offers.forEach((offer) => {
-      const marker = new Marker({
-        lat: offer.location.lat,
-        lng: offer.location.lng,
-      });
-
-      marker.setIcon(locationIcon).addTo(markerLayer);
+      const marker = new Marker(
+        [offer.location.latitude, offer.location.longitude],
+        {
+          icon: locationIcon,
+        }
+      );
+      marker.addTo(markerLayer);
     });
 
     return () => {
-      map.removeLayer(markerLayer);
+      markerLayer.remove();
     };
   }, [map, offers, selectedOfferId]);
 

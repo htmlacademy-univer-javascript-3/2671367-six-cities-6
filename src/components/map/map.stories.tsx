@@ -32,7 +32,7 @@ const mockOffers: MapProps['offers'] = offers;
 
 export const Default: Story = {
   args: {
-    city: cities[0],
+    location: cities[0].location,
     offers: mockOffers,
     selectedOfferId: undefined,
     className: 'map',
@@ -41,7 +41,7 @@ export const Default: Story = {
 
 export const MapWithMarks: Story = {
   args: {
-    city: cities[3],
+    location: cities[3].location,
     offers: mockOffers,
     selectedOfferId: undefined,
     className: 'map',

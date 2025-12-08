@@ -1,10 +1,21 @@
-import { Cities } from '../types/cityTypes';
+import { CityName } from '../entities/city/constant/cityConsts';
+import { City } from '../entities/city/model/cityTypes';
+import { Location } from '../entities/location/model/locationTypes';
 
-export const cities: Cities = [
-  { name: 'Paris', lat: 48.864716, lng: 2.349014 },
-  { name: 'Cologne', lat: 50.935173, lng: 6.953101 },
-  { name: 'Brussels', lat: 50.85045, lng: 4.34878 },
-  { name: 'Amsterdam', lat: 52.377956, lng: 4.89707 },
-  { name: 'Hamburg', lat: 53.551086, lng: 9.993682 },
-  { name: 'Dusseldorf', lat: 51.233334, lng: 6.783333 },
+const locations: Location[] = [
+  { latitude: 48.864716, longitude: 2.349014 },
+  { latitude: 50.935173, longitude: 6.953101 },
+  { latitude: 50.85045, longitude: 4.34878 },
+  { latitude: 52.377956, longitude: 4.89707 },
+  { latitude: 53.551086, longitude: 9.993682 },
+  { latitude: 51.233334, longitude: 6.783333 },
+];
+
+export const cities: City[] = [
+  { name: CityName.Paris, location: locations[0] },
+  { name: CityName.Cologne, location: locations[1] },
+  { name: CityName.Brussels, location: locations[2] },
+  { name: CityName.Amsterdam, location: locations[3] },
+  { name: CityName.Hamburg, location: locations[4] },
+  { name: CityName.Dusseldorf, location: locations[5] },
 ];

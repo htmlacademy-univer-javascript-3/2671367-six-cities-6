@@ -1,4 +1,4 @@
-import { Review } from '../types/reviewTypes';
+import { Review } from '../entities/review';
 
 export const reviews: Review[] = [
   {
@@ -6,6 +6,7 @@ export const reviews: Review[] = [
     user: {
       name: 'Max',
       avatarUrl: 'img/avatar-max.jpg',
+      isPro: false,
     },
     rating: 4,
     comment:
@@ -17,6 +18,7 @@ export const reviews: Review[] = [
     user: {
       name: 'Anna',
       avatarUrl: 'img/avatar-max.jpg',
+      isPro: false,
     },
     rating: 5,
     comment:
@@ -28,6 +30,7 @@ export const reviews: Review[] = [
     user: {
       name: 'John',
       avatarUrl: 'img/avatar-max.jpg',
+      isPro: false,
     },
     rating: 3,
     comment:
