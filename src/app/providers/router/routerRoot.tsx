@@ -19,7 +19,7 @@ export default function RoutRoot() {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Login} element={withSuspense(<LoginPage />)} />
-        
+
         {/* Public routes - accessible to all users */}
         <Route path={AppRoute.Root} element={withSuspense(<MainPage />)} />
         <Route path={AppRoute.Offer} element={withSuspense(<OfferPage />)} />
