@@ -33,12 +33,21 @@ const reviewSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload ?? undefined;
       })
+      .addCase(createOfferReview.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
       .addCase(createOfferReview.fulfilled, (state, action) => {
         const { offerId, review } = action.payload;
         if (!state.reviewsByOfferId[offerId]) {
           state.reviewsByOfferId[offerId] = [];
         }
         state.reviewsByOfferId[offerId].push(review);
+        state.isLoading = false;
+      })
+      .addCase(createOfferReview.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload ?? undefined;
       });
   },
 });

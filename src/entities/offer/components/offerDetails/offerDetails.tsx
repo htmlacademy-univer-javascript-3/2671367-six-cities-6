@@ -1,6 +1,15 @@
-import { memo, ReactNode, useMemo } from 'react';
+import { memo, ReactNode, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { OfferDetails } from '../../index';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../shared/hooks/appHooks';
+import { getAuthorizationStatus } from '../../../../entities/user/model/userSelector';
+import { AuthorizationStatus } from '../../../../consts';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../../../consts';
+import { toggleFavoriteOffer } from '../../index';
 
 interface OfferDetailsProps {
   offer: OfferDetails;
@@ -9,6 +18,31 @@ interface OfferDetailsProps {
 
 const OfferDetailsComponent = ({ offer, reviews }: OfferDetailsProps) => {
   const starsWidth = useMemo(() => offer.rating * 20, [offer.rating]);
+  const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const isAuth = authStatus === AuthorizationStatus.Auth;
+  const navigate = useNavigate();
+  const [isToggling, setIsToggling] = useState(false);
+
+  const handleBookmarkClick = async () => {
+    if (!isAuth) {
+      navigate(AppRoute.Login);
+      return;
+    }
+    if (isToggling) {
+      return;
+    }
+    setIsToggling(true);
+    try {
+      await dispatch(
+        toggleFavoriteOffer({ id: offer.id, status: offer.isFavorite ? 0 : 1 })
+      ).unwrap();
+    } catch (e) {
+      // ignore
+    } finally {
+      setIsToggling(false);
+    }
+  };
 
   return (
     <section className="offer">
@@ -38,6 +72,9 @@ const OfferDetailsComponent = ({ offer, reviews }: OfferDetailsProps) => {
                 'offer__bookmark-button--active': offer.isFavorite,
               })}
               type="button"
+              onClick={() => void handleBookmarkClick()}
+              disabled={isToggling}
+              aria-busy={isToggling}
             >
               <svg className="offer__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark" />

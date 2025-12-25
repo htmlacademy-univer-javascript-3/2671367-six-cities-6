@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { CitiesList } from '../components/citiesList/citiesList';
 import { SortSelector } from '../components/sortSelector/sortSelector';
 import { useCityName } from '../entities/city';
@@ -21,6 +21,7 @@ const MainPage: FC = () => {
   const dispatch = useAppDispatch();
   const sort = useOfferSort();
   const sortedOffers = filterOffers(offers, sort);
+  const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
 
   const currentCityName = useCityName();
   const currentCity = cities.find((c) => c.name === currentCityName)!;
@@ -32,6 +33,10 @@ const MainPage: FC = () => {
       dispatch(fetchOffersByCity(currentCity.name));
     }
   }, [currentCity, dispatch]);
+
+  const handleOfferHover = (offerId: string | null) => {
+    setSelectedOfferId(offerId);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -52,12 +57,20 @@ const MainPage: FC = () => {
               </b>
               <SortSelector />
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={sortedOffers} variant="cities" />
+                <OffersList
+                  offers={sortedOffers}
+                  variant="cities"
+                  onOfferHover={handleOfferHover}
+                />
               </div>
             </section>
 
             <div className="cities__right-section">
-              <CityMap city={currentCity} offers={sortedOffers} />
+              <CityMap
+                city={currentCity}
+                offers={sortedOffers}
+                selectedOfferId={selectedOfferId ?? undefined}
+              />
             </div>
           </div>
         </div>

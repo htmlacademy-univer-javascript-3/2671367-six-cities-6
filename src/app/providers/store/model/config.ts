@@ -2,7 +2,7 @@ import { configureStore, DeepPartial } from '@reduxjs/toolkit';
 import { StateSchema, ThunkExtraArg } from './stateInterfaces';
 import { reducers } from './reducer';
 
-import { apiErrorHandler } from '../../../../shared/api/error_handler';
+import { apiErrorHandler } from '../../../../shared/api/errorHandler';
 import { createAPI } from '../../../../shared/api/api';
 
 const api = createAPI();
