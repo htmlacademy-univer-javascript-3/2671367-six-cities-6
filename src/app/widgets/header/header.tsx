@@ -31,25 +31,29 @@ function HeaderComponent({
             </Link>
           </div>
 
-          {isAuth && (
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link
-                    className="header__nav-link header__nav-link--profile"
-                    to={AppRoute.Favorites}
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper" />
-                    <span className="header__user-name user__name">
-                      {email}
-                    </span>
-                    <span className="header__favorite-count">
-                      {favoriteCount}
-                    </span>
-                  </Link>
-                </li>
+          <nav className="header__nav">
+            <ul className="header__nav-list">
+              <li className="header__nav-item user">
+                <Link
+                  className="header__nav-link header__nav-link--profile"
+                  to={AppRoute.Favorites}
+                >
+                  <div className="header__avatar-wrapper user__avatar-wrapper" />
+                  <span className="header__user-name user__name">
+                    {email ?? 'Guest'}
+                  </span>
+                  <div>
+                    {isAuth ? (
+                      <span className="header__favorite-count">
+                        {favoriteCount}
+                      </span>
+                    ) : undefined}
+                  </div>
+                </Link>
+              </li>
 
-                <li className="header__nav-item">
+              <li className="header__nav-item">
+                {isAuth ? (
                   <button
                     className="header__nav-link header__signout"
                     type="button"
@@ -57,10 +61,17 @@ function HeaderComponent({
                   >
                     Sign out
                   </button>
-                </li>
-              </ul>
-            </nav>
-          )}
+                ) : (
+                  <Link
+                    className="header__nav-link header__signin"
+                    to={AppRoute.Login}
+                  >
+                    Sign in
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </header>

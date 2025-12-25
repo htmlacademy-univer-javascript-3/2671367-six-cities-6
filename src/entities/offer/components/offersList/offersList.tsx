@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { OffersListProps, VariantProps } from '../../../../interface/interface';
 import { OfferCard } from '../..';

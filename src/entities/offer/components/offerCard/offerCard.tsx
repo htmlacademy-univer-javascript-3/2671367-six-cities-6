@@ -1,6 +1,13 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { PlaceCardProps, VariantProps } from '../../../../interface/interface';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../shared/hooks/appHooks';
+import { getAuthorizationStatus } from '../../../../entities/user/model/userSelector';
+import { AuthorizationStatus, AppRoute } from '../../../../consts';
+import { toggleFavoriteOffer } from '../../index';
 
 export interface ExtendedPlaceCardProps extends PlaceCardProps, VariantProps {
   onMouseEnter?: () => void;
@@ -12,58 +19,89 @@ export const OfferCard: FC<ExtendedPlaceCardProps> = ({
   variant: block = 'cities',
   onMouseEnter,
   onMouseLeave,
-}) => (
-  <article
-    className={`${block}__card place-card`}
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    {offer.isPremium && (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-    )}
-    <div className={`${block}__image-wrapper place-card__image-wrapper`}>
-      <a href="#">
-        <img
-          className="place-card__image"
-          src={offer.previewImage}
-          width="260"
-          height="200"
-          alt={offer.title}
-        />
-      </a>
-    </div>
-    <div className="place-card__info">
-      <div className="place-card__price-wrapper">
-        <div className="place-card__price">
-          <b className="place-card__price-value">&euro;{offer.price}</b>
-          <span className="place-card__price-text">&#47;&nbsp;night</span>
+}) => {
+  const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const isAuth = authStatus === AuthorizationStatus.Auth;
+  const navigate = useNavigate();
+  const [isToggling, setIsToggling] = useState(false);
+
+  const handleBookmarkClick = async () => {
+    if (!isAuth) {
+      navigate(AppRoute.Login);
+      return;
+    }
+    if (isToggling) {
+      return;
+    }
+    setIsToggling(true);
+    try {
+      await dispatch(
+        toggleFavoriteOffer({ id: offer.id, status: offer.isFavorite ? 0 : 1 })
+      ).unwrap();
+    } catch (e) {
+      // ignore here; UI will be re-enabled
+    } finally {
+      setIsToggling(false);
+    }
+  };
+
+  return (
+    <article
+      className={`${block}__card place-card`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {offer.isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
         </div>
-        <button
-          className={`place-card__bookmark-button button${
-            offer.isFavorite ? ' place-card__bookmark-button--active' : ''
-          }`}
-          type="button"
-        >
-          <svg className="place-card__bookmark-icon" width="18" height="19">
-            <use xlinkHref="#icon-bookmark"></use>
-          </svg>
-          <span className="visually-hidden">
-            {offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}
-          </span>
-        </button>
+      )}
+      <div className={`${block}__image-wrapper place-card__image-wrapper`}>
+        <a href="#">
+          <img
+            className="place-card__image"
+            src={offer.previewImage}
+            width="260"
+            height="200"
+            alt={offer.title}
+          />
+        </a>
       </div>
-      <div className="place-card__rating rating">
-        <div className="place-card__stars rating__stars">
-          <span style={{ width: `${offer.rating * 20}%` }}></span>
-          <span className="visually-hidden">Rating</span>
+      <div className="place-card__info">
+        <div className="place-card__price-wrapper">
+          <div className="place-card__price">
+            <b className="place-card__price-value">&euro;{offer.price}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
+          </div>
+          <button
+            className={`place-card__bookmark-button button${
+              offer.isFavorite ? ' place-card__bookmark-button--active' : ''
+            }`}
+            type="button"
+            onClick={() => void handleBookmarkClick()}
+            disabled={isToggling}
+            aria-busy={isToggling}
+          >
+            <svg className="place-card__bookmark-icon" width="18" height="19">
+              <use xlinkHref="#icon-bookmark"></use>
+            </svg>
+            <span className="visually-hidden">
+              {offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}
+            </span>
+          </button>
         </div>
+        <div className="place-card__rating rating">
+          <div className="place-card__stars rating__stars">
+            <span style={{ width: `${offer.rating * 20}%` }}></span>
+            <span className="visually-hidden">Rating</span>
+          </div>
+        </div>
+        <h2 className="place-card__name">
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+        </h2>
+        <p className="place-card__type">{offer.type}</p>
       </div>
-      <h2 className="place-card__name">
-        <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
-      </h2>
-      <p className="place-card__type">{offer.type}</p>
-    </div>
-  </article>
-);
+    </article>
+  );
+};

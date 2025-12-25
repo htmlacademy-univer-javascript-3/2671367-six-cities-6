@@ -47,12 +47,24 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
     []
   );
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
+
   const handleSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
+      setValidationError(null);
+      // don't block UI (button is active), show validation feedback if invalid
       if (rating === null || comment.length < 50) {
+        setValidationError(
+          'Please set a rating and write at least 50 characters.'
+        );
         return;
       }
+
+      setIsSubmitting(true);
+      // safety timeout to avoid permanently disabled UI (10s)
+      const timeout = setTimeout(() => setIsSubmitting(false), 10000);
 
       dispatch(
         createOfferReview({
@@ -61,6 +73,8 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
           comment,
         })
       ).then((result) => {
+        clearTimeout(timeout);
+        setIsSubmitting(false);
         // Clear form only on success
         if (createOfferReview.fulfilled.match(result)) {
           setRating(null);
@@ -71,8 +85,8 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
     [dispatch, offerId, rating, comment]
   );
 
-  const isFormValid = rating !== null && comment.length >= 50;
-  const isDisabled = isLoading || !isFormValid;
+  // Button is active by default; it becomes disabled only during submit/load
+  const isDisabled = isLoading || isSubmitting;
 
   return (
     <form className="reviews__form form" onSubmit={handleSubmit}>
@@ -81,8 +95,20 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
       </label>
 
       {error && (
-        <div className="reviews__error" style={{ color: 'red', marginBottom: '10px' }}>
+        <div
+          className="reviews__error"
+          style={{ color: 'red', marginBottom: '10px' }}
+        >
           {error.message || 'Failed to submit review. Please try again.'}
+        </div>
+      )}
+
+      {validationError && (
+        <div
+          className="reviews__error"
+          style={{ color: 'red', marginBottom: '10px' }}
+        >
+          {validationError}
         </div>
       )}
 
@@ -97,7 +123,7 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
               type="radio"
               checked={rating === star}
               onChange={handleRatingChange}
-              disabled={isLoading}
+              disabled={isDisabled}
             />
             <label
               htmlFor={`rating-${star}`}
@@ -119,7 +145,7 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
         onChange={handleCommentChange}
-        disabled={isLoading}
+        disabled={isDisabled}
       />
 
       <div className="reviews__button-wrapper">
@@ -133,7 +159,7 @@ export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
           type="submit"
           disabled={isDisabled}
         >
-          {isLoading ? 'Submitting...' : 'Submit'}
+          {isLoading || isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
       </div>
     </form>
