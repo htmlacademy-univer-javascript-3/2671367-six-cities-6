@@ -29,3 +29,4 @@ export const UNEXPECTED_ERROR_MESSAGE = 'Something went wrong';
 
 export const BACKEND_URL = 'https://14.design.htmlacademy.pro/six-cities';
 export const REQUEST_TIMEOUT = 5000;
+export const COOKIE_ACCESS_TOKEN_KEY = 'accessToken';

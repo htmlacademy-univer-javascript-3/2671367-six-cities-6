@@ -1,13 +1,22 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../../consts';
 import { FC } from 'react';
-import { AuthProps } from '../../../interface/interface';
+import { useSelector } from 'react-redux';
+import { AppRoute, AuthorizationStatus } from '../../../consts';
+import { getAuthorizationStatus } from '../../../entities/user/model/userSelector';
+import { Loader } from '../../widgets/loader/loader';
 
-const ProtectRoute: FC<AuthProps> = ({ authorizationStatus }) =>
-  authorizationStatus !== AuthorizationStatus.Auth ? (
-    <Navigate to={AppRoute.Login} replace />
-  ) : (
+const ProtectRoute: FC = () => {
+  const authStatus = useSelector(getAuthorizationStatus);
+
+  if (authStatus === AuthorizationStatus.Unknown) {
+    return <Loader fullscreen />;
+  }
+
+  return authStatus === AuthorizationStatus.Auth ? (
     <Outlet />
+  ) : (
+    <Navigate to={AppRoute.Login} replace />
   );
+};
 
 export default ProtectRoute;

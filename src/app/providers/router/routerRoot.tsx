@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import ProtectRoute from './protectRoute';
-import { AppRoute, AuthorizationStatus } from '../../../consts';
+import { AppRoute } from '../../../consts';
 import { lazy, Suspense } from 'react';
 import { Loader } from '../../widgets/loader/loader';
 
@@ -20,11 +20,7 @@ export default function RoutRoot() {
       <Routes>
         <Route path={AppRoute.Login} element={withSuspense(<LoginPage />)} />
 
-        <Route
-          element={
-            <ProtectRoute authorizationStatus={AuthorizationStatus.Auth} />
-          }
-        >
+        <Route element={<ProtectRoute />}>
           <Route path={AppRoute.Root} element={withSuspense(<MainPage />)} />
           <Route
             path={AppRoute.Favorites}
