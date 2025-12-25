@@ -19,10 +19,6 @@ export const createOfferReview = createAsyncThunk<
     }
     return { offerId, review: response.data };
   } catch (e) {
-    return rejectWithValue({
-      errorType: 'UNEXPECTED_ERROR',
-      message: (e as Error).message,
-      details: [],
-    });
+    return rejectWithValue(extra.errorHandler(e));
   }
 });

@@ -1,6 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import type { ChangeEvent, FC, FormEvent } from 'react';
 import { RatingTitle } from '../../consts';
+import { useAppDispatch } from '../../shared/hooks/appHooks';
+import { createOfferReview } from '../../entities/review';
+import { useAppSelector } from '../../shared/hooks/appHooks';
+import {
+  getReviewsError,
+  getReviewsLoading,
+} from '../../entities/review/model/reviewSelector';
 
 const RATING_VALUES = [5, 4, 3, 2, 1];
 
@@ -19,9 +26,16 @@ const getRatingTitle = (star: number): RatingTitle => {
   }
 };
 
-export const CommentForm: FC = () => {
+interface CommentFormProps {
+  offerId: string;
+}
+
+export const CommentForm: FC<CommentFormProps> = ({ offerId }) => {
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState('');
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(getReviewsLoading);
+  const error = useAppSelector(getReviewsError);
 
   const handleRatingChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setRating(Number(e.target.value)),
@@ -33,20 +47,44 @@ export const CommentForm: FC = () => {
     []
   );
 
-  const handleSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-    // send logic
-    setRating(null);
-    setComment('');
-  }, []);
+  const handleSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      if (rating === null || comment.length < 50) {
+        return;
+      }
+
+      dispatch(
+        createOfferReview({
+          offerId,
+          rating,
+          comment,
+        })
+      ).then((result) => {
+        // Clear form only on success
+        if (createOfferReview.fulfilled.match(result)) {
+          setRating(null);
+          setComment('');
+        }
+      });
+    },
+    [dispatch, offerId, rating, comment]
+  );
 
   const isFormValid = rating !== null && comment.length >= 50;
+  const isDisabled = isLoading || !isFormValid;
 
   return (
     <form className="reviews__form form" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
+
+      {error && (
+        <div className="reviews__error" style={{ color: 'red', marginBottom: '10px' }}>
+          {error.message || 'Failed to submit review. Please try again.'}
+        </div>
+      )}
 
       <div className="reviews__rating-form form__rating">
         {RATING_VALUES.map((star) => (
@@ -59,6 +97,7 @@ export const CommentForm: FC = () => {
               type="radio"
               checked={rating === star}
               onChange={handleRatingChange}
+              disabled={isLoading}
             />
             <label
               htmlFor={`rating-${star}`}
@@ -80,6 +119,7 @@ export const CommentForm: FC = () => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
         onChange={handleCommentChange}
+        disabled={isLoading}
       />
 
       <div className="reviews__button-wrapper">
@@ -91,9 +131,9 @@ export const CommentForm: FC = () => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isFormValid}
+          disabled={isDisabled}
         >
-          Submit
+          {isLoading ? 'Submitting...' : 'Submit'}
         </button>
       </div>
     </form>

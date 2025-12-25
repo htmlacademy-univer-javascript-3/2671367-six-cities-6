@@ -40,6 +40,7 @@ const userSlice = createSlice({
       })
       .addCase(logout.rejected, (state) => {
         state.user = undefined;
+        state.authStatus = AuthorizationStatus.NoAuth;
       }),
 });
 

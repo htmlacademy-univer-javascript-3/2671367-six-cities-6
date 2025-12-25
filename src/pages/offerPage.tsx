@@ -54,7 +54,7 @@ const OfferPage: FC = () => {
       <main className="page__main page__main--offer">
         <OfferDetailsUI
           offer={offer}
-          reviews={<ReviewList reviews={reviews} />}
+          reviews={<ReviewList reviews={reviews} offerId={offer.id} />}
         />
         <section className="offer__map map">
           <CityMap

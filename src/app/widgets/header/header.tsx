@@ -6,9 +6,15 @@ interface HeaderProps {
   email?: string;
   favoriteCount?: number;
   isAuth: boolean;
+  onLogout: () => void;
 }
 
-function HeaderComponent({ email, favoriteCount = 0, isAuth }: HeaderProps) {
+function HeaderComponent({
+  email,
+  favoriteCount = 0,
+  isAuth,
+  onLogout,
+}: HeaderProps) {
   return (
     <header className="header">
       <div className="container">
@@ -47,6 +53,7 @@ function HeaderComponent({ email, favoriteCount = 0, isAuth }: HeaderProps) {
                   <button
                     className="header__nav-link header__signout"
                     type="button"
+                    onClick={onLogout}
                   >
                     Sign out
                   </button>

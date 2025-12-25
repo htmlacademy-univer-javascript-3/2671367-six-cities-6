@@ -2,13 +2,22 @@ import { FC } from 'react';
 import { PlaceCardProps, VariantProps } from '../../../../interface/interface';
 import { Link } from 'react-router-dom';
 
-export interface ExtendedPlaceCardProps extends PlaceCardProps, VariantProps {}
+export interface ExtendedPlaceCardProps extends PlaceCardProps, VariantProps {
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}
 
 export const OfferCard: FC<ExtendedPlaceCardProps> = ({
   offer,
   variant: block = 'cities',
+  onMouseEnter,
+  onMouseLeave,
 }) => (
-  <article className={`${block}__card place-card`}>
+  <article
+    className={`${block}__card place-card`}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
     {offer.isPremium && (
       <div className="place-card__mark">
         <span>Premium</span>
