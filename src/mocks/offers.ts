@@ -5,7 +5,7 @@ export const offers: OfferDetails[] = [
   {
     id: '1',
     title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment',
+    type: 'Apartment',
     price: 120,
     rating: 4,
     isPremium: true,
@@ -52,7 +52,7 @@ export const offers: OfferDetails[] = [
   {
     id: '2',
     title: 'Wood and stone place',
-    type: 'room',
+    type: 'Private room',
     price: 80,
     rating: 3,
     isPremium: false,
@@ -81,7 +81,7 @@ export const offers: OfferDetails[] = [
   {
     id: '3',
     title: 'Canal View Prinsengracht',
-    type: 'apartment',
+    type: 'Apartment',
     price: 132,
     rating: 4,
     isPremium: false,
@@ -110,7 +110,7 @@ export const offers: OfferDetails[] = [
   {
     id: '4',
     title: 'Nice, cozy, warm big bed apartment',
-    type: 'apartment',
+    type: 'Apartment',
     price: 180,
     rating: 5,
     isPremium: true,

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { offers } from '../../../../mocks/offers';
 import { ExtendedPlaceCardProps, OfferCard } from './offerCard';
