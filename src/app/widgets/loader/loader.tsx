@@ -37,7 +37,7 @@ function LoaderComponent({ size = 48, fullscreen = false }: LoaderProps) {
   if (fullscreen) {
     return (
       <div className={css.fullscreen}>
-        <div className={css.backdrop} />
+        <div className={css.backdrop} data-testid="backdrop" />
         <div className={css.modal}>{spinner}</div>
       </div>
     );
