@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
 import { FavoritesEmpty } from './favoritesEmpty';
 
 const meta: Meta<typeof FavoritesEmpty> = {
@@ -15,7 +14,7 @@ export const Default: Story = {};
 
 export const CustomText: Story = {
   args: {
-    message: "You haven't saved anything yet",
+    message: 'You haven`t saved anything yet',
     description: 'Add favorites to see them here',
   },
 };
