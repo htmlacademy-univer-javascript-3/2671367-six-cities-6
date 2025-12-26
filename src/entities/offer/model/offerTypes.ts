@@ -2,7 +2,7 @@ import { City } from '../../city/model/cityTypes';
 import { User } from '../../user/model/userTypes';
 import { Location } from '../../location/model/locationTypes';
 
-export type OfferType = 'apartment' | 'room' | 'house' | 'hotel';
+export type OfferType = 'Apartment' | 'Private room' | 'House' | 'Hotel';
 
 export interface Offer {
   id: string;
