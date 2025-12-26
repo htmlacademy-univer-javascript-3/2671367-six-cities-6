@@ -32,7 +32,7 @@ export interface ReviewListProps {
   reviews: Review[];
 }
 export interface VariantProps {
-  variant?: 'cities' | 'near-places';
+  variant?: 'cities' | 'near-places' | 'favorites';
 }
 
 export interface CitiesListProps {
