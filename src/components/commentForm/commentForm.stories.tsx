@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 import { CommentForm } from './commentForm';
-
 const meta: Meta<typeof CommentForm> = {
   title: 'Components/CommentForm',
   component: CommentForm,
@@ -10,7 +9,16 @@ const meta: Meta<typeof CommentForm> = {
 export default meta;
 type Story = StoryObj<typeof CommentForm>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    store: {
+      initialState: {
+        review: { isLoading: false, error: undefined },
+        user: { authStatus: 'AUTH' },
+      },
+    },
+  },
+};
 
 const CommentFormWrapper = () => {
   const [rating, setRating] = useState(4);

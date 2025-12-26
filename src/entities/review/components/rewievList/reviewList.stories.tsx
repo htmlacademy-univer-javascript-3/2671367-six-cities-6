@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ReviewList } from './reviewList';
 import { ReviewProps } from '../../../../interface/interface';
 
@@ -39,5 +39,21 @@ const mockReviews: ReviewProps['review'][] = [
 export const Default: Story = {
   args: {
     reviews: mockReviews,
+  },
+  parameters: {
+    store: {
+      initialState: { user: { authStatus: 'NO_AUTH' } },
+    },
+  },
+};
+
+export const Authenticated: Story = {
+  args: {
+    reviews: mockReviews,
+  },
+  parameters: {
+    store: {
+      initialState: { user: { authStatus: 'AUTH' } },
+    },
   },
 };

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { offers } from '../../../../mocks/offers';
-import { OffersList } from '../..';
+import { OffersList } from './offersList';
 
 const meta: Meta<typeof OffersList> = {
   title: 'Components/OffersList',
@@ -17,11 +17,21 @@ export const CitiesVariant: Story = {
     offers: offers,
     variant: 'cities',
   },
+  parameters: {
+    store: {
+      initialState: { user: { authStatus: 'NO_AUTH' } },
+    },
+  },
 };
 
 export const NearPlacesVariant: Story = {
   args: {
     offers: offers,
     variant: 'near-places',
+  },
+  parameters: {
+    store: {
+      initialState: { user: { authStatus: 'NO_AUTH' } },
+    },
   },
 };
