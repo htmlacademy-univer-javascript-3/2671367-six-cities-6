@@ -11,6 +11,7 @@ import { cities } from '../mocks/cities';
 import { useSetCity } from '../entities/city/hook/cityHooks';
 import { useAppDispatch } from '../shared/hooks/appHooks';
 import { CityMap } from '../app/widgets/cityMap';
+import CitiesNoPlaces from '../components/citiesNoPlaces/citiesNoPlaces';
 
 import { HeaderContainer } from '../app/widgets/header/headerContainer';
 import { useOfferSort } from '../entities/offer/hooks/offerHooks';
@@ -50,29 +51,36 @@ const MainPage: FC = () => {
         />
 
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <b className="places__found">
-                {offers.length} places to stay in {currentCityName}
-              </b>
-              <SortSelector />
-              <div className="cities__places-list places__list tabs__content">
-                <OffersList
+          {offers.length === 0 ? (
+            <div className="cities__places-container cities__places-container--empty container">
+              <CitiesNoPlaces cityName={currentCityName} />
+              <div className="cities__right-section" />
+            </div>
+          ) : (
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <b className="places__found">
+                  {offers.length} places to stay in {currentCityName}
+                </b>
+                <SortSelector />
+                <div className="cities__places-list places__list tabs__content">
+                  <OffersList
+                    offers={sortedOffers}
+                    variant="cities"
+                    onOfferHover={handleOfferHover}
+                  />
+                </div>
+              </section>
+
+              <div className="cities__right-section">
+                <CityMap
+                  city={currentCity}
                   offers={sortedOffers}
-                  variant="cities"
-                  onOfferHover={handleOfferHover}
+                  selectedOfferId={selectedOfferId ?? undefined}
                 />
               </div>
-            </section>
-
-            <div className="cities__right-section">
-              <CityMap
-                city={currentCity}
-                offers={sortedOffers}
-                selectedOfferId={selectedOfferId ?? undefined}
-              />
             </div>
-          </div>
+          )}
         </div>
       </main>
     </div>
