@@ -5,6 +5,8 @@ import { AuthorizationStatus } from '../../../consts';
 import { useAppDispatch } from '../../../shared/hooks/appHooks';
 import { logout } from '../../../entities/user/data/logoutUser';
 import { useFavoriteOffersByCity } from '../../../entities/offer/hooks/offerHooks';
+import { fetchFavoriteOffers } from '../../../entities/offer';
+import { useEffect } from 'react';
 
 export function HeaderContainer() {
   const user = useAppSelector((state) => state.user.user);
@@ -14,7 +16,14 @@ export function HeaderContainer() {
 
   const isAuth = authStatus === AuthorizationStatus.Auth;
   const email = user?.email;
-  const favoriteCount = favoriteOffers.length;
+
+  const favoriteCount = isAuth ? favoriteOffers.length : 0;
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(fetchFavoriteOffers());
+    }
+  }, [dispatch, isAuth]);
 
   const handleLogout = () => {
     dispatch(logout());
