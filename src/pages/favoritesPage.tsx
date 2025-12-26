@@ -4,6 +4,7 @@ import { useFavoriteOffersByCity } from '../entities/offer/hooks/offerHooks';
 
 import { HeaderContainer } from '../app/widgets/header/headerContainer';
 import { OffersList } from '../entities/offer';
+import FavoritesEmpty from '../components/favoritesEmpty/favoritesEmpty';
 
 const FavoritesPage: FC = () => {
   const favoriteOffers = useFavoriteOffersByCity();
@@ -14,10 +15,14 @@ const FavoritesPage: FC = () => {
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <OffersList offers={favoriteOffers} />
-          </section>
+          {favoriteOffers.length === 0 ? (
+            <FavoritesEmpty />
+          ) : (
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <OffersList offers={favoriteOffers} />
+            </section>
+          )}
         </div>
       </main>
       <footer className="footer container">
