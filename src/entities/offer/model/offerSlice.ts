@@ -10,6 +10,7 @@ import {
   calculateFavoritesCount,
   toggleFavoriteOffers,
 } from '../util/favoriteOffers';
+import { logout } from '../../user/data/logoutUser';
 
 const initialState: OfferState = {
   availableOffers: [],
@@ -63,6 +64,22 @@ const offerSlice = createSlice({
         state.favoriteCount = calculateFavoritesCount(state.favoriteOffers);
         if (state.offer && state.offer.id === id) {
           state.offer.isFavorite = !state.offer.isFavorite;
+        }
+      })
+      .addCase(logout.fulfilled, (state) => {
+        // Clear cached favorites and reset related flags on offers when user logs out
+        state.favoriteOffers = {};
+        state.favoriteCount = 0;
+        state.availableOffers = state.availableOffers.map((o) => ({
+          ...o,
+          isFavorite: false,
+        }));
+        state.nearbyOffers = state.nearbyOffers.map((o) => ({
+          ...o,
+          isFavorite: false,
+        }));
+        if (state.offer) {
+          state.offer.isFavorite = false;
         }
       }),
 });
