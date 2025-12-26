@@ -19,6 +19,9 @@ export const Default: Story = {
     offer: { ...mockOffer, isFavorite: false },
     variant: 'cities',
   },
+  parameters: {
+    store: { initialState: { user: { authStatus: 'NO_AUTH' } } },
+  },
 };
 
 export const FavoriteActive: Story = {
@@ -26,11 +29,17 @@ export const FavoriteActive: Story = {
     offer: { ...mockOffer, isFavorite: true },
     variant: 'cities',
   },
+  parameters: {
+    store: { initialState: { user: { authStatus: 'AUTH' } } },
+  },
 };
 
 export const PremiumOffer: Story = {
   args: {
     offer: { ...mockOffer, isPremium: true },
     variant: 'cities',
+  },
+  parameters: {
+    store: { initialState: { user: { authStatus: 'NO_AUTH' } } },
   },
 };
