@@ -31,41 +31,54 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('offerHooks', () => {
-  it('useOfferSort returns current sort value from selector', () => {
-    mockedUseSelector.mockReturnValue('price-asc');
-
-    function TestComponent() {
-      const value = useOfferSort();
-      return <div data-testid="value">{value}</div>;
+describe('offerHooks compact coverage', () => {
+  it('useOfferSort returns value or undefined', () => {
+    // нормальное значение
+    mockedUseSelector.mockReturnValueOnce('price-asc');
+    function Test1() {
+      const val = useOfferSort();
+      return <div data-testid="val1">{String(val)}</div>;
     }
+    const { getByTestId } = render(<Test1 />);
+    expect(getByTestId('val1').textContent).toBe('price-asc');
 
-    const { getByTestId } = render(<TestComponent />);
-
-    expect(getByTestId('value').textContent).toBe('price-asc');
+    mockedUseSelector.mockReturnValueOnce(undefined);
+    function Test2() {
+      const val = useOfferSort();
+      return <div data-testid="val2">{String(val)}</div>;
+    }
+    const { getByTestId: get2 } = render(<Test2 />);
+    expect(get2('val2').textContent).toBe('undefined');
   });
 
-  it('useSetOfferSort dispatches setSort action with correct payload', () => {
+  it('useSetOfferSort dispatches multiple sort types', () => {
     const mockDispatchFn = vi.fn();
-    mockedUseDispatch.mockReturnValue(
-      mockDispatchFn as unknown as typeof mockDispatchFn
-    );
+    mockedUseDispatch.mockReturnValue(mockDispatchFn);
 
-    function TestComponent() {
+    function Test() {
       const setSort = useSetOfferSort();
-      return <button data-testid="btn" onClick={() => setSort('price-desc')} />;
+      return (
+        <>
+          <button data-testid="btn1" onClick={() => setSort('price-asc')} />
+          <button data-testid="btn2" onClick={() => setSort('price-desc')} />
+        </>
+      );
     }
+    const { getByTestId } = render(<Test />);
+    fireEvent.click(getByTestId('btn1'));
+    fireEvent.click(getByTestId('btn2'));
 
-    const { getByTestId } = render(<TestComponent />);
-    fireEvent.click(getByTestId('btn'));
+    expect(mockDispatchFn).toHaveBeenCalledWith(
+      offerActions.setSort('price-asc')
+    );
     expect(mockDispatchFn).toHaveBeenCalledWith(
       offerActions.setSort('price-desc')
     );
   });
 
-  it('useFavoriteOffersByCity returns flattened favorite offers when no city provided', () => {
-    const offersByCity: Record<string, Offer[]> = {
-      ['Paris']: [
+  it('useFavoriteOffersByCity handles all city cases', () => {
+    const favoriteOffers: Record<string, Offer[] | null> = {
+      Paris: [
         {
           id: '1',
           title: 't1',
@@ -73,87 +86,43 @@ describe('offerHooks', () => {
           price: 100,
           city: {
             name: CityName.Paris,
-            location: { latitude: 48.864716, longitude: 2.349014 },
+            location: { latitude: 0, longitude: 0 },
           },
-          location: { latitude: 48.864716, longitude: 2.349014 },
-          rating: 4.5,
+          location: { latitude: 0, longitude: 0 },
+          rating: 4,
           isPremium: false,
           isFavorite: false,
           previewImage: '',
         },
       ],
-      ['Cologne']: [
-        {
-          id: '2',
-          title: 't2',
-          type: 'Apartment',
-          price: 120,
-          city: {
-            name: CityName.Cologne,
-            location: { latitude: 50.935173, longitude: 6.953101 },
-          },
-          location: { latitude: 50.935173, longitude: 6.953101 },
-          rating: 3.5,
-          isPremium: false,
-          isFavorite: false,
-          previewImage: '',
-        },
-        {
-          id: '3',
-          title: 't3',
-          type: 'Hotel',
-          price: 200,
-          city: {
-            name: CityName.Cologne,
-            location: { latitude: 50.935173, longitude: 6.953101 },
-          },
-          location: { latitude: 50.935173, longitude: 6.953101 },
-          rating: 4.1,
-          isPremium: false,
-          isFavorite: false,
-          previewImage: '',
-        },
-      ],
+      Cologne: null,
     };
-    mockedUseSelector.mockReturnValue(offersByCity);
+    mockedUseSelector.mockReturnValue(favoriteOffers);
 
-    function TestComponent() {
-      const offers = useFavoriteOffersByCity();
-      return <div data-testid="count">{offers.length}</div>;
-    }
-
-    const { getByTestId } = render(<TestComponent />);
-    expect(getByTestId('count').textContent).toBe('3');
-  });
-
-  it('useFavoriteOffersByCity returns offers for specific city', () => {
-    const offersByCitySpecific: Record<string, Offer[]> = {
-      ['Paris']: [
-        {
-          id: '1',
-          title: 't1',
-          type: 'Apartment',
-          price: 100,
-          city: {
-            name: CityName.Paris,
-            location: { latitude: 48.864716, longitude: 2.349014 },
-          },
-          location: { latitude: 48.864716, longitude: 2.349014 },
-          rating: 4.5,
-          isPremium: false,
-          isFavorite: false,
-          previewImage: '',
-        },
-      ],
-    };
-    mockedUseSelector.mockReturnValue(offersByCitySpecific);
-
-    function TestComponent() {
+    function Test1() {
       const offers = useFavoriteOffersByCity(CityName.Paris);
-      return <div data-testid="count">{offers.length}</div>;
+      return <div data-testid="count1">{offers.length}</div>;
+    }
+    function Test2() {
+      const offers = useFavoriteOffersByCity(CityName.Cologne);
+      return <div data-testid="count2">{offers.length}</div>;
     }
 
-    const { getByTestId } = render(<TestComponent />);
-    expect(getByTestId('count').textContent).toBe('1');
+    function Test3() {
+      const offers = useFavoriteOffersByCity();
+      return <div data-testid="count3">{offers.length}</div>;
+    }
+
+    const { getByTestId } = render(
+      <>
+        <Test1 />
+        <Test2 />
+        <Test3 />
+      </>
+    );
+
+    expect(getByTestId('count1').textContent).toBe('1');
+    expect(getByTestId('count2').textContent).toBe('0');
+    expect(getByTestId('count3').textContent).toBe('1');
   });
 });

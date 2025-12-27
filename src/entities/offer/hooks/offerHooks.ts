@@ -26,5 +26,5 @@ export const useFavoriteOffersByCity = (city?: CityName): Offer[] => {
     return favoriteOffers[city] ?? [];
   }
 
-  return Object.values(favoriteOffers).flat();
+  return Object.values(favoriteOffers).filter(Boolean).flat();
 };
