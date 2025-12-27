@@ -15,6 +15,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "1.9.7",
     "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
     "classnames": "2.3.2",
     "history": "5.3.0",
     "http-status-codes": "2.3.0",
@@ -42,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "6.7.4",
     "@typescript-eslint/parser": "6.7.4",
     "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/coverage-v8": "^4.0.11",
     "axios-mock-adapter": "1.22.0",
     "chromatic": "^13.3.4",
     "eslint": "^8.51.0",

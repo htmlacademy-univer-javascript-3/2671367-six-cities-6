@@ -1,3 +1,7 @@
+<!-- COVERAGE-BADGE-START -->
+![Coverage](https://img.shields.io/badge/Coverage-86.17%25-brightgreen)
+<!-- COVERAGE-BADGE-END -->
+
 # Личный проект «Шесть городов»
 
 - Студент: [Алексей Бисмус](https://up.htmlacademy.ru/univer-js3/6/user/2671367).
@@ -9,6 +13,16 @@
 
 _Не удаляйте и не изменяйте папки и файлы:_
 _`.editorconfig`, `.gitattributes`, `.gitignore`._
+
+---
+
+### Coverage Stats
+
+<!-- COVERAGE-START -->
+| File | % Statements | % Branches | % Functions | % Lines |
+|------|---------|---------|--------|--------|
+| All files | 84.29% | 73.93% | 69.51% | 86.17% |
+<!-- COVERAGE-END -->
 
 ---
 
