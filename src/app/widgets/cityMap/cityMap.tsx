@@ -1,9 +1,9 @@
 import { memo, useMemo } from 'react';
-import Map from '../../components/map/map';
-import { Offer } from '../../entities/offer';
-import { City, CITY_LOCATIONS, CityName } from '../../entities/city';
-import { FALLBACK_CITY } from '../../entities/city/constant/cityConsts';
-import { Location } from '../../entities/location/index';
+import Map from '../../../components/map/map';
+import { Offer } from '../../../entities/offer';
+import { City, CITY_LOCATIONS, CityName } from '../../../entities/city';
+import { FALLBACK_CITY } from '../../../entities/city/constant/cityConsts';
+import { Location } from '../../../entities/location/index';
 
 interface CityMapProps {
   city: City | CityName | null;

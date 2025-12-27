@@ -10,7 +10,7 @@ import {
 import { cities } from '../mocks/cities';
 import { useSetCity } from '../entities/city/hook/cityHooks';
 import { useAppDispatch } from '../shared/hooks/appHooks';
-import { CityMap } from '../app/widgets/cityMap';
+import { CityMap } from '../app/widgets/cityMap/cityMap';
 import CitiesNoPlaces from '../components/citiesNoPlaces/citiesNoPlaces';
 
 import { HeaderContainer } from '../app/widgets/header/headerContainer';
