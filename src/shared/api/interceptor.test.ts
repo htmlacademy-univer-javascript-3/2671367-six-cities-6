@@ -1,4 +1,5 @@
 import axios, {
+  AxiosInstance,
   AxiosRequestHeaders,
   type AxiosError,
   type InternalAxiosRequestConfig,
@@ -82,5 +83,53 @@ describe('setupInterceptors', () => {
 
     await expect(responseInterceptor(error)).rejects.toBe(error);
     expect(authToken.removeAccessToken).not.toHaveBeenCalled();
+  });
+
+  it('does nothing when error is not an axios error', async () => {
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(false);
+
+    const err = new Error('network') as unknown as AxiosError;
+
+    await expect(responseInterceptor(err)).rejects.toBe(err);
+
+    expect(authToken.removeAccessToken).not.toHaveBeenCalled();
+  });
+
+  it('does nothing for axios errors with non-401 status', async () => {
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
+
+    const error = {
+      response: { status: 403 },
+      isAxiosError: true,
+    } as unknown as AxiosError;
+
+    await expect(responseInterceptor(error)).rejects.toBe(error);
+
+    expect(authToken.removeAccessToken).not.toHaveBeenCalled();
+    expect(window.location.href).toBe('');
+  });
+
+  it('registers interceptors on the api instance', () => {
+    const reqUse = vi.fn();
+    const resUse = vi.fn();
+
+    const fakeApi = {
+      interceptors: {
+        request: { use: reqUse },
+        response: { use: resUse },
+      },
+    } as unknown as AxiosInstance;
+
+    setupInterceptors(fakeApi);
+
+    expect(reqUse).toHaveBeenCalledWith(requestInterceptor);
+
+    expect(resUse).toHaveBeenCalled();
+    const [[firstArg, secondArg]] = resUse.mock.calls as unknown as [
+      unknown,
+      unknown
+    ][];
+    expect(typeof firstArg).toBe('function');
+    expect(secondArg).toBe(responseInterceptor);
   });
 });

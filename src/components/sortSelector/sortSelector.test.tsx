@@ -41,4 +41,30 @@ describe('SortSelector', () => {
 
     expect(setSort).toHaveBeenCalledWith('price-asc');
   });
+
+  it('does not call setSort on invalid option', () => {
+    mockedUseOfferSort.mockReturnValue('popular-desc');
+    const setSort = vi.fn();
+    mockedUseSetOfferSort.mockReturnValue(setSort);
+
+    const { container } = render(<SortSelector />);
+
+    const toggle = container.querySelector(
+      '.places__sorting-type'
+    ) as HTMLElement;
+    fireEvent.click(toggle);
+
+    const optionsList = container.querySelector(
+      '.places__options'
+    ) as HTMLElement;
+
+    const fakeOption = document.createElement('li');
+    fakeOption.textContent = 'Invalid Option';
+    fakeOption.onclick = () => {};
+    optionsList.appendChild(fakeOption);
+
+    fireEvent.click(fakeOption);
+
+    expect(setSort).not.toHaveBeenCalled();
+  });
 });

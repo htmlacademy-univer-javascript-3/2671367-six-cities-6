@@ -1,6 +1,7 @@
 <!-- COVERAGE-BADGE-START -->
-![Coverage](https://img.shields.io/badge/Coverage-86.17%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-95.65%25-brightgreen)
 <!-- COVERAGE-BADGE-END -->
+
 
 # Личный проект «Шесть городов»
 
@@ -21,7 +22,7 @@ _`.editorconfig`, `.gitattributes`, `.gitignore`._
 <!-- COVERAGE-START -->
 | File | % Statements | % Branches | % Functions | % Lines |
 |------|---------|---------|--------|--------|
-| All files | 84.29% | 73.93% | 69.51% | 86.17% |
+| All files | 96% | 87.5% | 91.66% | 95.65% |
 <!-- COVERAGE-END -->
 
 ---

@@ -1,6 +1,7 @@
 import * as matchers from '@testing-library/jest-dom/matchers';
 import * as appHooks from '../src/shared/hooks/appHooks';
 import { expect } from 'vitest';
+import { ServerError } from './interface/interface';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
 expect.extend(matchers as any);
@@ -32,3 +33,14 @@ vi.mock('../src/shared/hooks/appHooks', async () => {
 
 export const mockedUseAppDispatch = vi.mocked(appHooks.useAppDispatch);
 export const mockedUseAppSelector = vi.mocked(appHooks.useAppSelector);
+export const mockUnexpectedError: ServerError = {
+  errorType: 'UNEXPECTED_ERROR',
+  message: 'error',
+  details: [],
+};
+
+export const mockValidationError: ServerError = {
+  errorType: 'VALIDATION_ERROR',
+  message: 'error',
+  details: [],
+};
