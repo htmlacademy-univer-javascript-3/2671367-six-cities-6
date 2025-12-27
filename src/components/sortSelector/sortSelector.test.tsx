@@ -1,0 +1,44 @@
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { render, fireEvent, within } from '@testing-library/react';
+import * as offerHooks from '../../entities/offer/hooks/offerHooks';
+import { SortSelector } from './sortSelector';
+
+vi.mock('../../entities/offer/hooks/offerHooks', async () => {
+  const actual = await vi.importActual<typeof offerHooks>(
+    '../../entities/offer/hooks/offerHooks'
+  );
+  return {
+    ...actual,
+    useOfferSort: vi.fn(),
+    useSetOfferSort: vi.fn(),
+  };
+});
+
+const mockedUseOfferSort = vi.mocked(offerHooks.useOfferSort);
+const mockedUseSetOfferSort = vi.mocked(offerHooks.useSetOfferSort);
+
+afterEach(() => vi.clearAllMocks());
+
+describe('SortSelector', () => {
+  it('calls setSort on valid option selection', () => {
+    mockedUseOfferSort.mockReturnValue('popular-desc');
+    const setSort = vi.fn();
+    mockedUseSetOfferSort.mockReturnValue(setSort);
+
+    const { container } = render(<SortSelector />);
+
+    const toggle = container.querySelector(
+      '.places__sorting-type'
+    ) as HTMLElement;
+    fireEvent.click(toggle);
+
+    const optionsList = container.querySelector(
+      '.places__options'
+    ) as HTMLElement;
+    const option = within(optionsList).getByText('Price: low to high');
+
+    fireEvent.click(option);
+
+    expect(setSort).toHaveBeenCalledWith('price-asc');
+  });
+});

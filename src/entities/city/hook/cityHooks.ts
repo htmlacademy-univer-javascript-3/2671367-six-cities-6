@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { cityActions, CityName } from '..';
+import { useAppDispatch } from '../../../shared/hooks/appHooks';
 
 export const useSetCity = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (name: CityName) => dispatch(cityActions.setCity(name));
 };

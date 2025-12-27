@@ -1,0 +1,30 @@
+name: Test & Coverage
+
+on:
+    workflow_run:
+        workflows:
+            - Project check
+        types:
+            - completed
+
+jobs:
+    test-and-coverage:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run tests with coverage
+              run: npm test -- --coverage
+
+            - name: Generate README coverage badge
+              run: node scripts/parseCoverage.js

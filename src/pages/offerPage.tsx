@@ -4,7 +4,7 @@ import {
   useNearOffers,
   useOffer,
 } from '../entities/offer/usecases/offerUsecases';
-import { CityMap } from '../app/widgets/cityMap';
+import { CityMap } from '../app/widgets/cityMap/cityMap';
 
 import { HeaderContainer } from '../app/widgets/header/headerContainer';
 import { OfferDetailsUI } from '../entities/offer/components/offerDetails/offerDetails';
