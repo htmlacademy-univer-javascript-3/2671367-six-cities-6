@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render } from '@testing-library/react';
 
 import * as redux from 'react-redux';
-import { useUserAuthData } from './userUsecases';
+import { useAuthError, useUserAuthData } from './userUsecases';
 
 vi.mock('react-redux', async () => {
   const actual = await vi.importActual<typeof redux>('react-redux');
@@ -23,17 +23,16 @@ afterEach(() => {
 });
 
 describe('user usecases', () => {
-  it('useAuthError returns auth error', () => {
+  it('useUserAuthData returns undefined when no user', () => {
     mockedUseSelector.mockReturnValue(undefined);
 
     function Test() {
       const val = useUserAuthData();
-      return <div data-testid="val">{JSON.stringify(val) ?? ''}</div>;
+      return <div data-testid="val">{String(val)}</div>;
     }
 
     const { getByTestId } = render(<Test />);
-
-    expect(getByTestId('val').textContent).toBe('');
+    expect(getByTestId('val').textContent).toBe('undefined');
   });
 
   it('useUserAuthData returns user data', () => {
@@ -46,7 +45,31 @@ describe('user usecases', () => {
     }
 
     const { getByTestId } = render(<Test />);
-
     expect(getByTestId('val').textContent).toBe(JSON.stringify(user));
+  });
+
+  it('useAuthError returns undefined when no error', () => {
+    mockedUseSelector.mockReturnValue(undefined);
+
+    function Test() {
+      const val = useAuthError();
+      return <div data-testid="val">{String(val)}</div>;
+    }
+
+    const { getByTestId } = render(<Test />);
+    expect(getByTestId('val').textContent).toBe('undefined');
+  });
+
+  it('useAuthError returns auth error', () => {
+    const error = 'bad creds';
+    mockedUseSelector.mockReturnValue(error);
+
+    function Test() {
+      const val = useAuthError();
+      return <div data-testid="val">{String(val)}</div>;
+    }
+
+    const { getByTestId } = render(<Test />);
+    expect(getByTestId('val').textContent).toBe(error);
   });
 });
