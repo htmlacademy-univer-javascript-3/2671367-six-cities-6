@@ -20,7 +20,7 @@ jobs:
         name: Checkout
 
       - name: Install dependencies
-        run: npm installProject check
+        run: npm install
 
       - name: Run checks
         run: npm test -- --coverage && npm run lint
