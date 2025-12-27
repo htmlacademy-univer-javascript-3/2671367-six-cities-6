@@ -3,6 +3,7 @@ import { fetchOfferReviews } from '../data/fetchReview';
 import { createOfferReview } from '../data/createReview';
 import type { ReviewState } from './reviewState';
 import { reviews } from '../../../mocks/reviews';
+import { mockUnexpectedError } from '../../../setupTests';
 
 const initial: ReviewState | undefined = undefined;
 
@@ -35,5 +36,72 @@ describe('review reducer', () => {
     );
     expect(next.reviewsByOfferId['1']).toEqual([payload.review]);
     expect(next.isLoading).toBe(false);
+  });
+
+  it('should set error on fetchOfferReviews.rejected', () => {
+    const next = reviewReducer(
+      initial,
+      fetchOfferReviews.rejected(
+        new Error('error'),
+        '',
+        '1',
+        mockUnexpectedError
+      )
+    );
+
+    expect(next.isLoading).toBe(false);
+    expect(next.error).toBe(mockUnexpectedError);
+  });
+
+  it('should set loading on createOfferReview.pending', () => {
+    const next = reviewReducer(
+      initial,
+      createOfferReview.pending('', {
+        offerId: '1',
+        rating: 5,
+        comment: 'ok',
+      })
+    );
+
+    expect(next.isLoading).toBe(true);
+    expect(next.error).toBeUndefined();
+  });
+
+  it('should set error on createOfferReview.rejected', () => {
+    const next = reviewReducer(
+      initial,
+      createOfferReview.rejected(
+        new Error('error'),
+        '',
+        { offerId: '1', rating: 5, comment: 'ok' },
+        mockUnexpectedError
+      )
+    );
+
+    expect(next.isLoading).toBe(false);
+    expect(next.error).toBe(mockUnexpectedError);
+  });
+
+  it('should append review if reviews for offer already exist', () => {
+    const startState: ReviewState = {
+      reviewsByOfferId: {
+        '1': [reviews[0]],
+      },
+      isLoading: false,
+      error: undefined,
+    };
+
+    const payload = { offerId: '1', review: reviews[1] };
+
+    const next = reviewReducer(
+      startState,
+      createOfferReview.fulfilled(payload, '', {
+        offerId: '1',
+        rating: 5,
+        comment: 'ok',
+      })
+    );
+
+    expect(next.reviewsByOfferId['1']).toEqual([reviews[0], reviews[1]]);
   });
 });
