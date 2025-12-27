@@ -1,73 +1,183 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { fetchOffersByCity } from './fetchOffersByCity';
 import type { AxiosInstance } from 'axios';
-import type { AnyAction } from '@reduxjs/toolkit';
-import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
-import { OfferDetails } from '../model/offerTypes';
-import { fetchOfferDetalies } from '..';
+import { Offer } from '..';
+import { CityName } from '../../city';
 import { offers } from '../../../mocks/offers';
+import {
+  StateSchema,
+  ThunkExtraArg,
+} from '../../../app/providers/store/model/stateInterfaces';
+import { AnyAction } from '@reduxjs/toolkit';
+import { ServerError } from '../../../interface/interface';
+import { mockedUseAppDispatch } from '../../../setupTests';
+import * as filterUtils from '../util/filterOffers';
 
-describe('fetchOfferDetalies', () => {
-  const mockOfferDetails: OfferDetails = offers[0];
+const mockLocation = { search: '' };
+vi.stubGlobal('window', { location: mockLocation });
+vi.mock('../util/filterOffers');
 
-  it('should successfully fetch offer details', async () => {
-    const mockApi = {
-      get: vi.fn().mockResolvedValue({ data: mockOfferDetails }),
-    } as unknown as AxiosInstance;
+const mockedIsOfferFilterType = vi.mocked(filterUtils.isOfferFilterType);
+const mockedFilterOffers = vi.mocked(filterUtils.filterOffers);
 
-    const extra: ThunkExtraArg = {
-      api: mockApi,
-      errorHandler: vi.fn(),
-    };
+beforeEach(() => {
+  mockedIsOfferFilterType.mockReset();
+  mockedFilterOffers.mockReset();
+});
 
-    const thunk = fetchOfferDetalies('1');
+describe('fetchOffersByCity', () => {
+  let mockOffer: Offer;
+  let mockApi: AxiosInstance;
+  let mockErrorHandler: (error: unknown) => ServerError;
+  let dispatch: ReturnType<typeof mockedUseAppDispatch>;
+  let getState: () => StateSchema;
+  let extra: ThunkExtraArg;
 
-    const result = (await thunk(vi.fn(), vi.fn(), extra)) as AnyAction;
+  beforeEach(() => {
+    mockOffer = offers[0];
 
-    expect(mockApi.get).toHaveBeenCalledWith('/offers/1');
-    expect(result.type).toBe(fetchOfferDetalies.fulfilled.type);
-    expect(result.payload).toEqual(mockOfferDetails);
+    mockApi = { get: vi.fn() } as unknown as AxiosInstance;
+    mockErrorHandler = vi.fn().mockImplementation(() => ({
+      errorType: 'UNEXPECTED_ERROR',
+      message: 'Error fetching offers',
+      details: [],
+    }));
+    dispatch = vi.fn();
+    getState = vi.fn();
+    extra = { api: mockApi, errorHandler: mockErrorHandler };
+    mockLocation.search = '';
   });
 
-  it('should reject if response data is empty', async () => {
-    const errorPayload = { message: 'Empty response', status: 500 };
+  it('should fetch and filter offers by city', async () => {
+    const mockOffers: Offer[] = [
+      {
+        ...mockOffer,
+        id: '1',
+        city: { ...mockOffer.city, name: CityName.Paris },
+      },
+      {
+        ...mockOffer,
+        id: '2',
+        city: { ...mockOffer.city, name: CityName.Cologne },
+      },
+      {
+        ...mockOffer,
+        id: '3',
+        city: { ...mockOffer.city, name: CityName.Paris },
+      },
+    ];
 
-    const mockApi = {
-      get: vi.fn().mockResolvedValue({ data: null }),
-    } as unknown as AxiosInstance;
+    mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
 
-    const extra: ThunkExtraArg = {
-      api: mockApi,
-      errorHandler: vi.fn().mockReturnValue(errorPayload),
+    const thunk = fetchOffersByCity(CityName.Paris);
+    const result = (await thunk(dispatch, getState, extra)) as AnyAction;
+
+    expect(mockApi.get).toHaveBeenCalledWith('/offers');
+    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.payload).toHaveLength(2);
+    expect(
+      (
+        result as {
+          type: string;
+          payload: Offer[];
+        }
+      ).payload.every((o: Offer) => o.city.name === CityName.Paris)
+    ).toBe(true);
+  });
+
+  it('should apply sorting from URL params if valid', async () => {
+    mockLocation.search = '?sort-by=price-low';
+
+    const mockOffers: Offer[] = [
+      { ...mockOffer, id: '1', price: 200 },
+      { ...mockOffer, id: '2', price: 100 },
+    ];
+
+    mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
+
+    mockedIsOfferFilterType.mockReturnValue(true);
+    mockedFilterOffers.mockReturnValue(mockOffers);
+
+    const thunk = fetchOffersByCity(CityName.Paris);
+    const result = (await thunk(dispatch, getState, extra)) as {
+      type: string;
+      payload: Offer[];
     };
 
-    const thunk = fetchOfferDetalies('1');
+    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.payload).toEqual(mockOffers);
+  });
 
-    const result = (await thunk(vi.fn(), vi.fn(), extra)) as AnyAction;
+  it('should ignore invalid sort parameter', async () => {
+    mockLocation.search = '?sort-by=invalid';
 
-    expect(mockApi.get).toHaveBeenCalledWith('/offers/1');
-    expect(result.type).toBe(fetchOfferDetalies.rejected.type);
-    expect(result.payload).toEqual(errorPayload);
+    const mockOffers: Offer[] = [
+      {
+        ...mockOffer,
+        id: '1',
+        city: { ...mockOffer.city, name: CityName.Paris },
+      },
+      {
+        ...mockOffer,
+        id: '2',
+        city: { ...mockOffer.city, name: CityName.Cologne },
+      },
+    ];
+
+    mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
+
+    const thunk = fetchOffersByCity(CityName.Paris);
+    const result = (await thunk(dispatch, getState, extra)) as {
+      type: string;
+      payload: Offer[];
+    };
+
+    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.payload).toEqual([
+      mockOffers[0], // только Paris
+    ]);
+  });
+
+  it('should return empty array if no offers match city', async () => {
+    const mockOffers: Offer[] = [
+      { ...mockOffer, city: { ...mockOffer.city, name: CityName.Cologne } },
+    ];
+    mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
+
+    const thunk = fetchOffersByCity(CityName.Paris);
+    const result = (await thunk(dispatch, getState, extra)) as AnyAction;
+
+    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.payload).toEqual([]);
   });
 
   it('should handle API error', async () => {
     const error = new Error('Network error');
-    const errorPayload = { message: 'Server error', status: 500 };
+    mockApi.get = vi.fn().mockRejectedValue(error);
 
-    const mockApi = {
-      get: vi.fn().mockRejectedValue(error),
-    } as unknown as AxiosInstance;
+    const thunk = fetchOffersByCity(CityName.Paris);
+    const result = (await thunk(dispatch, getState, extra)) as AnyAction;
 
-    const extra: ThunkExtraArg = {
-      api: mockApi,
-      errorHandler: vi.fn().mockReturnValue(errorPayload),
-    };
+    expect(mockErrorHandler).toHaveBeenCalledWith(error);
+    expect(result.type).toBe('offer/fetchOffersByCity/rejected');
+    expect(result.payload).toEqual({
+      errorType: 'UNEXPECTED_ERROR',
+      message: 'Error fetching offers',
+      details: [],
+    });
+  });
 
-    const thunk = fetchOfferDetalies('1');
+  it('should reject if response data is null', async () => {
+    mockApi.get = vi.fn().mockResolvedValue({ data: null });
 
-    const result = (await thunk(vi.fn(), vi.fn(), extra)) as AnyAction;
+    const thunk = fetchOffersByCity(CityName.Paris);
+    const result = (await thunk(dispatch, getState, extra)) as AnyAction;
 
-    expect(mockApi.get).toHaveBeenCalledWith('/offers/1');
-    expect(result.type).toBe(fetchOfferDetalies.rejected.type);
-    expect(result.payload).toEqual(errorPayload);
+    expect(result.type).toBe('offer/fetchOffersByCity/rejected');
+    expect(result.payload).toEqual({
+      errorType: 'UNEXPECTED_ERROR',
+      message: 'Error fetching offers',
+      details: [],
+    });
   });
 });
