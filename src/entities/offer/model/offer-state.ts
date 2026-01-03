@@ -6,7 +6,7 @@ export interface OfferState {
   availableOffers: Offer[];
   nearbyOffers: Offer[];
   offer: OfferDetails | null;
-  favorite_offers: Partial<Record<CityName, Offer[]>>;
+  favoriteOffers: Partial<Record<CityName, Offer[]>>;
   favoriteCount: number;
   filterBy: OfferFilterType;
 }

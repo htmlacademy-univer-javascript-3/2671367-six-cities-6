@@ -17,11 +17,11 @@ const initialState: OfferState = {
   nearbyOffers: [],
   offer: null,
   favoriteCount: 0,
-  favorite_offers: {},
+  favoriteOffers: {},
   filterBy: 'popular-desc',
 };
 
-const offer_slice = createSlice({
+const offerSlice = createSlice({
   name: 'offer',
   initialState,
   reducers: {
@@ -35,8 +35,8 @@ const offer_slice = createSlice({
         state.availableOffers = action.payload;
       })
       .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
-        state.favorite_offers = action.payload;
-        state.favoriteCount = calculateFavoritesCount(state.favorite_offers);
+        state.favoriteOffers = action.payload;
+        state.favoriteCount = calculateFavoritesCount(state.favoriteOffers);
       })
       .addCase(fetchOfferDetalies.fulfilled, (state, action) => {
         state.offer = action.payload;
@@ -49,27 +49,26 @@ const offer_slice = createSlice({
         const status = action.meta.arg.status;
         const id = action.meta.arg.id;
         if (status === 1) {
-          if (!(offer.city.name in state.favorite_offers)) {
-            state.favorite_offers[offer.city.name] = [];
+          if (!(offer.city.name in state.favoriteOffers)) {
+            state.favoriteOffers[offer.city.name] = [];
           }
-          state.favorite_offers[offer.city.name]!.push(offer);
+          state.favoriteOffers[offer.city.name]!.push(offer);
         }
         if (status === 0) {
-          state.favorite_offers[offer.city.name] =
-            state.favorite_offers[offer.city.name]?.filter(
-              (o) => o.id !== id
-            ) ?? [];
+          state.favoriteOffers[offer.city.name] =
+            state.favoriteOffers[offer.city.name]?.filter((o) => o.id !== id) ??
+            [];
         }
         state.nearbyOffers = toggleFavoriteOffers(state.nearbyOffers, id);
         state.availableOffers = toggleFavoriteOffers(state.availableOffers, id);
-        state.favoriteCount = calculateFavoritesCount(state.favorite_offers);
+        state.favoriteCount = calculateFavoritesCount(state.favoriteOffers);
         if (state.offer && state.offer.id === id) {
           state.offer.isFavorite = !state.offer.isFavorite;
         }
       })
       .addCase(logout.fulfilled, (state) => {
         // Clear cached favorites and reset related flags on offers when user logs out
-        state.favorite_offers = {};
+        state.favoriteOffers = {};
         state.favoriteCount = 0;
         state.availableOffers = state.availableOffers.map((o) => ({
           ...o,
@@ -85,5 +84,5 @@ const offer_slice = createSlice({
       }),
 });
 
-export const offerActions = offer_slice.actions;
-export const offerReducer = offer_slice.reducer;
+export const offerActions = offerSlice.actions;
+export const offerReducer = offerSlice.reducer;

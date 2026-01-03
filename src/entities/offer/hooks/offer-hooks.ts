@@ -19,7 +19,7 @@ export const useSetOfferSort = (): ((sort: OfferFilterType) => void) => {
 
 export const useFavoriteOffersByCity = (city?: CityName): Offer[] => {
   const favoriteOffers = useSelector(
-    (state: { offer: OfferState }) => state.offer.favorite_offers
+    (state: { offer: OfferState }) => state.offer.favoriteOffers
   );
 
   if (city) {

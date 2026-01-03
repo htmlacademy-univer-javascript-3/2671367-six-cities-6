@@ -8,7 +8,7 @@ export const getNearbyOffers = (state: StateSchema) => state.offer.nearbyOffers;
 export const getOffer = (state: StateSchema) => state.offer.offer;
 
 export const getFavoriteOffers = (state: StateSchema) =>
-  state.offer.favorite_offers;
+  state.offer.favoriteOffers;
 
 export const getFavoriteCount = (state: StateSchema) =>
   state.offer.favoriteCount;

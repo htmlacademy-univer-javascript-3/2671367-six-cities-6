@@ -14,7 +14,7 @@ describe('offer selectors', () => {
       availableOffers: [{ id: 'a1' }],
       nearbyOffers: [{ id: 'n1' }],
       offer: { id: 'o1' },
-      favorite_offers: [{ id: 'f1' }],
+      favoriteOffers: [{ id: 'f1' }],
       favoriteCount: 7,
     },
   } as unknown as StateSchema;

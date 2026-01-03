@@ -77,7 +77,7 @@ describe('offer_hooks compact coverage', () => {
   });
 
   it('useFavoriteOffersByCity handles all city cases', () => {
-    const favorite_offers: Record<string, Offer[] | null> = {
+    const favoriteOffers: Record<string, Offer[] | null> = {
       Paris: [
         {
           id: '1',
@@ -97,7 +97,7 @@ describe('offer_hooks compact coverage', () => {
       ],
       Cologne: null,
     };
-    mockedUseSelector.mockReturnValue(favorite_offers);
+    mockedUseSelector.mockReturnValue(favoriteOffers);
 
     function Test1() {
       const offers = useFavoriteOffersByCity(CityName.Paris);

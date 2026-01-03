@@ -28,7 +28,7 @@ describe('offer reducer', () => {
     expect(state.availableOffers).toEqual([]);
     expect(state.nearbyOffers).toEqual([]);
     expect(state.offer).toBeNull();
-    expect(state.favorite_offers).toEqual({});
+    expect(state.favoriteOffers).toEqual({});
     expect(state.favoriteCount).toBe(0);
     expect(state.filterBy).toBe('popular-desc');
   });
@@ -63,7 +63,7 @@ describe('offer reducer', () => {
     expect(next.nearbyOffers).toEqual([parisOffer]);
   });
 
-  it('should set favorite_offers and favoriteCount on fetch_favorite_offers.fulfilled', () => {
+  it('should set favoriteOffers and favoriteCount on fetch_favorite_offers.fulfilled', () => {
     const payload = {
       Paris: [parisOffer],
       Amsterdam: [amsterdamOffer],
@@ -74,7 +74,7 @@ describe('offer reducer', () => {
       fetchFavoriteOffers.fulfilled(payload, '', undefined)
     );
 
-    expect(next.favorite_offers).toEqual(payload);
+    expect(next.favoriteOffers).toEqual(payload);
     expect(next.favoriteCount).toBe(2);
   });
 
@@ -87,8 +87,8 @@ describe('offer reducer', () => {
       })
     );
 
-    expect(next.favorite_offers['Paris']).toHaveLength(1);
-    expect(next.favorite_offers['Paris']![0].id).toBe('1');
+    expect(next.favoriteOffers['Paris']).toHaveLength(1);
+    expect(next.favoriteOffers['Paris']![0].id).toBe('1');
     expect(next.favoriteCount).toBe(1);
   });
 
@@ -99,7 +99,7 @@ describe('offer reducer', () => {
       offer: null,
       filterBy: 'popular-desc',
       favoriteCount: 1,
-      favorite_offers: {
+      favoriteOffers: {
         Paris: [parisOffer],
       },
     };
@@ -112,7 +112,7 @@ describe('offer reducer', () => {
       })
     );
 
-    expect(next.favorite_offers['Paris']).toEqual([]);
+    expect(next.favoriteOffers['Paris']).toEqual([]);
     expect(next.favoriteCount).toBe(0);
   });
 
@@ -121,7 +121,7 @@ describe('offer reducer', () => {
       availableOffers: [{ ...parisOffer }],
       nearbyOffers: [{ ...parisOffer }],
       offer: null,
-      favorite_offers: {},
+      favoriteOffers: {},
       favoriteCount: 0,
       filterBy: 'popular-desc',
     };
@@ -143,7 +143,7 @@ describe('offer reducer', () => {
       availableOffers: [],
       nearbyOffers: [],
       offer: { ...parisOffer, isFavorite: false },
-      favorite_offers: {},
+      favoriteOffers: {},
       favoriteCount: 0,
       filterBy: 'popular-desc',
     };
@@ -164,7 +164,7 @@ describe('offer reducer', () => {
       availableOffers: [{ ...parisOffer, isFavorite: true }],
       nearbyOffers: [{ ...parisOffer, isFavorite: true }],
       offer: { ...parisOffer, isFavorite: true },
-      favorite_offers: { Paris: [parisOffer] },
+      favoriteOffers: { Paris: [parisOffer] },
       favoriteCount: 1,
       filterBy: 'popular-desc',
     };
@@ -174,7 +174,7 @@ describe('offer reducer', () => {
       logout.fulfilled(undefined, '', undefined)
     );
 
-    expect(next.favorite_offers).toEqual({});
+    expect(next.favoriteOffers).toEqual({});
     expect(next.favoriteCount).toBe(0);
     expect(next.availableOffers[0].isFavorite).toBe(false);
     expect(next.nearbyOffers[0].isFavorite).toBe(false);
