@@ -1,8 +1,8 @@
 import { AuthorizationStatus } from '../consts';
 import { City } from '../entities/city/model/city_types';
 import { ERROR_TYPE } from '../types/errorTypes';
-import { Offer } from '../entities/offer/model/offerTypes';
-import { Review } from '../entities/review/model/reviewTypes';
+import { Offer } from '../entities/offer/model/offer_types';
+import { Review } from '../entities/review/model/review_types';
 import { Location } from '../entities/location/index';
 
 export interface AuthProps {

@@ -3,7 +3,7 @@ import { CityName } from '../../city';
 import {
   toggleFavoriteOffers,
   calculateFavoritesCount,
-} from './favoriteOffers';
+} from './favorite_offers';
 
 describe('toggleFavoriteOffers', () => {
   it('toggles isFavorite for matching offer', () => {

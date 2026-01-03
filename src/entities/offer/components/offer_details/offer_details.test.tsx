@@ -56,7 +56,7 @@ describe('OfferDetailsUI', () => {
     expect(navigateMock).toHaveBeenCalledWith(AppRoute.Login);
   });
 
-  it('dispatches toggleFavoriteOffer when auth', () => {
+  it('dispatches toggle_favorite_offer when auth', () => {
     mockedUseAppSelector.mockReturnValue(
       AuthorizationStatus.Auth as AuthorizationStatus
     );

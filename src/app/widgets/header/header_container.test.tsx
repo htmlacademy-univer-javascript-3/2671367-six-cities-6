@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
 import * as hooks from '../../../shared/hooks/appHooks';
-import * as offerHooks from '../../../entities/offer/hooks/offerHooks';
+import * as offer_hooks from '../../../entities/offer/hooks/offer_hooks';
 import * as offerModule from '../../../entities/offer';
 
 import { getAuthorizationStatus } from '../../../entities/user/model/userSelector';
@@ -13,9 +13,9 @@ import {
   mockedUseAppSelector,
 } from '../../../setupTests';
 
-vi.mock('../../../entities/offer/hooks/offerHooks', async () => {
-  const actual = await vi.importActual<typeof offerHooks>(
-    '../../../entities/offer/hooks/offerHooks'
+vi.mock('../../../entities/offer/hooks/offer_hooks', async () => {
+  const actual = await vi.importActual<typeof offer_hooks>(
+    '../../../entities/offer/hooks/offer_hooks'
   );
   return {
     ...actual,
@@ -24,7 +24,7 @@ vi.mock('../../../entities/offer/hooks/offerHooks', async () => {
 });
 
 const mockedUseFavoriteOffersByCity = vi.mocked(
-  offerHooks.useFavoriteOffersByCity
+  offer_hooks.useFavoriteOffersByCity
 );
 
 beforeEach(() => vi.clearAllMocks());
@@ -32,7 +32,7 @@ beforeEach(() => vi.clearAllMocks());
 afterEach(() => vi.restoreAllMocks());
 
 describe('HeaderContainer', () => {
-  it('dispatches fetchFavoriteOffers on mount when authorized', () => {
+  it('dispatches fetch_favorite_offers on mount when authorized', () => {
     const dispatch = vi.fn();
     mockedUseAppDispatch.mockReturnValue(
       dispatch as unknown as ReturnType<typeof hooks.useAppDispatch>
@@ -49,7 +49,7 @@ describe('HeaderContainer', () => {
     mockedUseFavoriteOffersByCity.mockReturnValue([]);
 
     const fetchFn = vi.fn();
-    vi.spyOn(offerModule, 'fetchFavoriteOffers').mockReturnValue(
+    vi.spyOn(offerModule, 'fetch_favorite_offers').mockReturnValue(
       fetchFn as unknown as typeof fetchFn
     );
 

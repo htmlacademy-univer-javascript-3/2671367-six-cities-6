@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { fetchOffersByCity } from './fetchOffersByCity';
+import { fetch_offers_by_city } from './fetch_offers_by_city';
 import type { AxiosInstance } from 'axios';
 import { Offer } from '..';
 import { CityName } from '../../city';
@@ -7,25 +7,25 @@ import { offers } from '../../../mocks/offers';
 import {
   StateSchema,
   ThunkExtraArg,
-} from '../../../app/providers/store/model/stateInterfaces';
+} from '../../../app/providers/store/model/state_interfaces';
 import { AnyAction } from '@reduxjs/toolkit';
 import { ServerError } from '../../../interface/interface';
 import { mockedUseAppDispatch } from '../../../setupTests';
-import * as filterUtils from '../util/filterOffers';
+import * as filterUtils from '../util/filter_offers';
 
 const mockLocation = { search: '' };
 vi.stubGlobal('window', { location: mockLocation });
-vi.mock('../util/filterOffers');
+vi.mock('../util/filter_offers');
 
 const mockedIsOfferFilterType = vi.mocked(filterUtils.isOfferFilterType);
-const mockedFilterOffers = vi.mocked(filterUtils.filterOffers);
+const mockedFilterOffers = vi.mocked(filterUtils.filter_offers);
 
 beforeEach(() => {
   mockedIsOfferFilterType.mockReset();
   mockedFilterOffers.mockReset();
 });
 
-describe('fetchOffersByCity', () => {
+describe('fetch_offers_by_city', () => {
   let mockOffer: Offer;
   let mockApi: AxiosInstance;
   let mockErrorHandler: (error: unknown) => ServerError;
@@ -69,11 +69,11 @@ describe('fetchOffersByCity', () => {
 
     mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
 
-    const thunk = fetchOffersByCity(CityName.Paris);
+    const thunk = fetch_offers_by_city(CityName.Paris);
     const result = (await thunk(dispatch, getState, extra)) as AnyAction;
 
     expect(mockApi.get).toHaveBeenCalledWith('/offers');
-    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.type).toBe('offer/fetch_offers_by_city/fulfilled');
     expect(result.payload).toHaveLength(2);
     expect(
       (
@@ -98,13 +98,13 @@ describe('fetchOffersByCity', () => {
     mockedIsOfferFilterType.mockReturnValue(true);
     mockedFilterOffers.mockReturnValue(mockOffers);
 
-    const thunk = fetchOffersByCity(CityName.Paris);
+    const thunk = fetch_offers_by_city(CityName.Paris);
     const result = (await thunk(dispatch, getState, extra)) as {
       type: string;
       payload: Offer[];
     };
 
-    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.type).toBe('offer/fetch_offers_by_city/fulfilled');
     expect(result.payload).toEqual(mockOffers);
   });
 
@@ -126,13 +126,13 @@ describe('fetchOffersByCity', () => {
 
     mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
 
-    const thunk = fetchOffersByCity(CityName.Paris);
+    const thunk = fetch_offers_by_city(CityName.Paris);
     const result = (await thunk(dispatch, getState, extra)) as {
       type: string;
       payload: Offer[];
     };
 
-    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.type).toBe('offer/fetch_offers_by_city/fulfilled');
     expect(result.payload).toEqual([
       mockOffers[0], // только Paris
     ]);
@@ -144,10 +144,10 @@ describe('fetchOffersByCity', () => {
     ];
     mockApi.get = vi.fn().mockResolvedValue({ data: mockOffers });
 
-    const thunk = fetchOffersByCity(CityName.Paris);
+    const thunk = fetch_offers_by_city(CityName.Paris);
     const result = (await thunk(dispatch, getState, extra)) as AnyAction;
 
-    expect(result.type).toBe('offer/fetchOffersByCity/fulfilled');
+    expect(result.type).toBe('offer/fetch_offers_by_city/fulfilled');
     expect(result.payload).toEqual([]);
   });
 
@@ -155,11 +155,11 @@ describe('fetchOffersByCity', () => {
     const error = new Error('Network error');
     mockApi.get = vi.fn().mockRejectedValue(error);
 
-    const thunk = fetchOffersByCity(CityName.Paris);
+    const thunk = fetch_offers_by_city(CityName.Paris);
     const result = (await thunk(dispatch, getState, extra)) as AnyAction;
 
     expect(mockErrorHandler).toHaveBeenCalledWith(error);
-    expect(result.type).toBe('offer/fetchOffersByCity/rejected');
+    expect(result.type).toBe('offer/fetch_offers_by_city/rejected');
     expect(result.payload).toEqual({
       errorType: 'UNEXPECTED_ERROR',
       message: 'Error fetching offers',
@@ -170,10 +170,10 @@ describe('fetchOffersByCity', () => {
   it('should reject if response data is null', async () => {
     mockApi.get = vi.fn().mockResolvedValue({ data: null });
 
-    const thunk = fetchOffersByCity(CityName.Paris);
+    const thunk = fetch_offers_by_city(CityName.Paris);
     const result = (await thunk(dispatch, getState, extra)) as AnyAction;
 
-    expect(result.type).toBe('offer/fetchOffersByCity/rejected');
+    expect(result.type).toBe('offer/fetch_offers_by_city/rejected');
     expect(result.payload).toEqual({
       errorType: 'UNEXPECTED_ERROR',
       message: 'Error fetching offers',

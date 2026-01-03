@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, fireEvent, within } from '@testing-library/react';
-import * as offerHooks from '../../entities/offer/hooks/offerHooks';
+import * as offer_hooks from '../../entities/offer/hooks/offer_hooks';
 import { SortSelector } from './sort_selector';
 
-vi.mock('../../entities/offer/hooks/offerHooks', async () => {
-  const actual = await vi.importActual<typeof offerHooks>(
-    '../../entities/offer/hooks/offerHooks'
+vi.mock('../../entities/offer/hooks/offer_hooks', async () => {
+  const actual = await vi.importActual<typeof offer_hooks>(
+    '../../entities/offer/hooks/offer_hooks'
   );
   return {
     ...actual,
@@ -14,8 +14,8 @@ vi.mock('../../entities/offer/hooks/offerHooks', async () => {
   };
 });
 
-const mockedUseOfferSort = vi.mocked(offerHooks.useOfferSort);
-const mockedUseSetOfferSort = vi.mocked(offerHooks.useSetOfferSort);
+const mockedUseOfferSort = vi.mocked(offer_hooks.useOfferSort);
+const mockedUseSetOfferSort = vi.mocked(offer_hooks.useSetOfferSort);
 
 afterEach(() => vi.clearAllMocks());
 

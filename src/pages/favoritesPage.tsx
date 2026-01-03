@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 
-import { useFavoriteOffersByCity } from '../entities/offer/hooks/offerHooks';
+import { useFavoriteOffersByCity } from '../entities/offer/hooks/offer_hooks';
 
 import { HeaderContainer } from '../app/widgets/header/header_container';
-import { fetchOffersByCity, OffersList } from '../entities/offer';
+import { fetch_offers_by_city, OffersList } from '../entities/offer';
 import FavoritesEmpty from '../components/favorites_empty/favorites_empty';
 import { useCityName } from '../entities/city';
 import { useSetCity } from '../entities/city/hook/city_hooks';
@@ -15,13 +15,13 @@ const FavoritesPage: FC = () => {
   const currentCityName = useCityName();
   const currentCity = cities.find((c) => c.name === currentCityName)!;
 
-  const favoriteOffers = useFavoriteOffersByCity(currentCity.name);
+  const favorite_offers = useFavoriteOffersByCity(currentCity.name);
   const dispatch = useAppDispatch();
   const setCity = useSetCity();
 
   useEffect(() => {
     if (currentCity) {
-      dispatch(fetchOffersByCity(currentCity.name));
+      dispatch(fetch_offers_by_city(currentCity.name));
     }
   }, [currentCity, dispatch]);
 
@@ -37,12 +37,12 @@ const FavoritesPage: FC = () => {
         />
 
         <div className="page__favorites-container container">
-          {favoriteOffers.length === 0 ? (
+          {favorite_offers.length === 0 ? (
             <FavoritesEmpty />
           ) : (
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <OffersList offers={favoriteOffers} />
+              <OffersList offers={favorite_offers} />
             </section>
           )}
         </div>

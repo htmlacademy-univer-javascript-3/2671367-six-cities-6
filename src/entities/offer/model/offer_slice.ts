@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { OfferState } from './offerState';
+import { OfferState } from './offer_state';
 import { OfferFilterType } from '../constant/offer_consts';
-import { fetchOffersByCity } from '../data/fetchOffersByCity';
-import { fetchOfferDetalies } from '../data/fetchOfferDetailes';
-import { fetchNearOffersByCity } from '../data/fetchNearOffers';
-import { toggleFavoriteOffer } from '../data/toggleFavoriteOffer';
-import { fetchFavoriteOffers } from '../data/fetchFavoriteOffers';
+import { fetch_offers_by_city } from '../data/fetch_offers_by_city';
+import { fetchOfferDetalies } from '../data/fetch_offer_detailes';
+import { fetchNearOffersByCity } from '../data/fetch_near_offers';
+import { toggle_favorite_offer } from '../data/toggle_favorite_offer';
+import { fetch_favorite_offers } from '../data/fetch_favorite_offers';
 import {
   calculateFavoritesCount,
   toggleFavoriteOffers,
-} from '../util/favoriteOffers';
+} from '../util/favorite_offers';
 import { logout } from '../../user/data/logoutUser';
 
 const initialState: OfferState = {
@@ -17,11 +17,11 @@ const initialState: OfferState = {
   nearbyOffers: [],
   offer: null,
   favoriteCount: 0,
-  favoriteOffers: {},
+  favorite_offers: {},
   filterBy: 'popular-desc',
 };
 
-const offerSlice = createSlice({
+const offer_slice = createSlice({
   name: 'offer',
   initialState,
   reducers: {
@@ -31,12 +31,12 @@ const offerSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchOffersByCity.fulfilled, (state, action) => {
+      .addCase(fetch_offers_by_city.fulfilled, (state, action) => {
         state.availableOffers = action.payload;
       })
-      .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
-        state.favoriteOffers = action.payload;
-        state.favoriteCount = calculateFavoritesCount(state.favoriteOffers);
+      .addCase(fetch_favorite_offers.fulfilled, (state, action) => {
+        state.favorite_offers = action.payload;
+        state.favoriteCount = calculateFavoritesCount(state.favorite_offers);
       })
       .addCase(fetchOfferDetalies.fulfilled, (state, action) => {
         state.offer = action.payload;
@@ -44,31 +44,31 @@ const offerSlice = createSlice({
       .addCase(fetchNearOffersByCity.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
       })
-      .addCase(toggleFavoriteOffer.fulfilled, (state, action) => {
+      .addCase(toggle_favorite_offer.fulfilled, (state, action) => {
         const offer = action.payload;
         const status = action.meta.arg.status;
         const id = action.meta.arg.id;
         if (status === 1) {
-          if (!(offer.city.name in state.favoriteOffers)) {
-            state.favoriteOffers[offer.city.name] = [];
+          if (!(offer.city.name in state.favorite_offers)) {
+            state.favorite_offers[offer.city.name] = [];
           }
-          state.favoriteOffers[offer.city.name]!.push(offer);
+          state.favorite_offers[offer.city.name]!.push(offer);
         }
         if (status === 0) {
-          state.favoriteOffers[offer.city.name] =
-            state.favoriteOffers[offer.city.name]?.filter((o) => o.id !== id) ??
+          state.favorite_offers[offer.city.name] =
+            state.favorite_offers[offer.city.name]?.filter((o) => o.id !== id) ??
             [];
         }
         state.nearbyOffers = toggleFavoriteOffers(state.nearbyOffers, id);
         state.availableOffers = toggleFavoriteOffers(state.availableOffers, id);
-        state.favoriteCount = calculateFavoritesCount(state.favoriteOffers);
+        state.favoriteCount = calculateFavoritesCount(state.favorite_offers);
         if (state.offer && state.offer.id === id) {
           state.offer.isFavorite = !state.offer.isFavorite;
         }
       })
       .addCase(logout.fulfilled, (state) => {
         // Clear cached favorites and reset related flags on offers when user logs out
-        state.favoriteOffers = {};
+        state.favorite_offers = {};
         state.favoriteCount = 0;
         state.availableOffers = state.availableOffers.map((o) => ({
           ...o,
@@ -84,5 +84,5 @@ const offerSlice = createSlice({
       }),
 });
 
-export const offerActions = offerSlice.actions;
-export const offerReducer = offerSlice.reducer;
+export const offerActions = offer_slice.actions;
+export const offerReducer = offer_slice.reducer;

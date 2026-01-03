@@ -1,5 +1,5 @@
 import { configureStore, DeepPartial } from '@reduxjs/toolkit';
-import { StateSchema, ThunkExtraArg } from './stateInterfaces';
+import { StateSchema, ThunkExtraArg } from './state_interfaces';
 import { reducers } from './reducer';
 
 import { apiErrorHandler } from '../../../../shared/api/errorHandler';

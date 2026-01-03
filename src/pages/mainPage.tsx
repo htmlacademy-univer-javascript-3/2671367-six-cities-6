@@ -4,7 +4,7 @@ import { SortSelector } from '../components/sort_selector/sort_selector';
 import { useCityName } from '../entities/city';
 import {
   useAvailableOffers,
-  fetchOffersByCity,
+  fetch_offers_by_city,
   OffersList,
 } from '../entities/offer';
 import { cities } from '../mocks/cities';
@@ -14,14 +14,14 @@ import { CityMap } from '../app/widgets/city_map/city_map';
 import CitiesNoPlaces from '../components/cities_no_places/cities_no_places';
 
 import { HeaderContainer } from '../app/widgets/header/header_container';
-import { useOfferSort } from '../entities/offer/hooks/offerHooks';
-import { filterOffers } from '../entities/offer/util/filterOffers';
+import { useOfferSort } from '../entities/offer/hooks/offer_hooks';
+import { filter_offers } from '../entities/offer/util/filter_offers';
 
 const MainPage: FC = () => {
   const offers = useAvailableOffers();
   const dispatch = useAppDispatch();
   const sort = useOfferSort();
-  const sortedOffers = filterOffers(offers, sort);
+  const sortedOffers = filter_offers(offers, sort);
   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
 
   const currentCityName = useCityName();
@@ -31,7 +31,7 @@ const MainPage: FC = () => {
 
   useEffect(() => {
     if (currentCity) {
-      dispatch(fetchOffersByCity(currentCity.name));
+      dispatch(fetch_offers_by_city(currentCity.name));
     }
   }, [currentCity, dispatch]);
 

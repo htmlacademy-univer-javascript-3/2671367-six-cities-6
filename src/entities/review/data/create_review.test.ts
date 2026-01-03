@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import type { AxiosInstance } from 'axios';
 import type { AnyAction } from '@reduxjs/toolkit';
-import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
+import type { ThunkExtraArg } from '../../../app/providers/store/model/state_interfaces';
 
-import { createOfferReview } from './createReview';
+import { createOfferReview } from './create_review';
 
 describe('createOfferReview', () => {
   it('should successfully create review', async () => {

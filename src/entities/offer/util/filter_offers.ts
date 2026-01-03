@@ -1,5 +1,5 @@
 import { OfferFilterType, offerFilterValues } from '../constant/offer_consts';
-import { Offer } from '../model/offerTypes';
+import { Offer } from '../model/offer_types';
 
 const sortFunctions: Record<
   OfferFilterType,
@@ -11,7 +11,7 @@ const sortFunctions: Record<
   'top-desc': (a, b) => b.rating - a.rating,
 };
 
-export const filterOffers = (
+export const filter_offers = (
   offers: Offer[],
   sortType: OfferFilterType
 ): Offer[] => {

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ServerError } from '../../../interface/interface';
-import { ThunkConfig } from '../../../app/providers/store/model/stateInterfaces';
+import { ThunkConfig } from '../../../app/providers/store/model/state_interfaces';
 import { CityName } from '../../city/constant/city_consts';
-import { Offer } from '../model/offerTypes';
+import { Offer } from '../model/offer_types';
 
 interface Args {
   id: string;

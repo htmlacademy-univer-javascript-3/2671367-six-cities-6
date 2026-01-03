@@ -1,11 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import type { AxiosInstance } from 'axios';
 import type { AnyAction } from '@reduxjs/toolkit';
-import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
+import type { ThunkExtraArg } from '../../../app/providers/store/model/state_interfaces';
 
 import { fetchNearOffersByCity } from '..';
 import { CityName } from '../../city/constant/city_consts';
-import type { Offer } from '../model/offerTypes';
+import type { Offer } from '../model/offer_types';
 import { offers } from '../../../mocks/offers';
 
 describe('fetchNearOffersByCity', () => {

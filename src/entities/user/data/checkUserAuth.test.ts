@@ -1,6 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import type { AxiosInstance } from 'axios';
-import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
+import type { ThunkExtraArg } from '../../../app/providers/store/model/state_interfaces';
 import type { AnyAction } from '@reduxjs/toolkit';
 import { checkAuth } from './checkUserAuth';
 

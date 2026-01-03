@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { offerActions } from '../model/offerSlice';
+import { offerActions } from '../model/offer_slice';
 import { OfferFilterType } from '../constant/offer_consts';
 
 import { StateSchema } from '../../../app/providers/store';
@@ -18,13 +18,13 @@ export const useSetOfferSort = (): ((sort: OfferFilterType) => void) => {
 };
 
 export const useFavoriteOffersByCity = (city?: CityName): Offer[] => {
-  const favoriteOffers = useSelector(
-    (state: { offer: OfferState }) => state.offer.favoriteOffers
+  const favorite_offers = useSelector(
+    (state: { offer: OfferState }) => state.offer.favorite_offers
   );
 
   if (city) {
-    return favoriteOffers[city] ?? [];
+    return favorite_offers[city] ?? [];
   }
 
-  return Object.values(favoriteOffers).filter(Boolean).flat();
+  return Object.values(favorite_offers).filter(Boolean).flat();
 };

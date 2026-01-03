@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReviewState } from './reviewState';
+import { ReviewState } from './review_state';
 import { createOfferReview, fetchOfferReviews, Review } from '..';
 
 const initialState: ReviewState = {
@@ -8,7 +8,7 @@ const initialState: ReviewState = {
   isLoading: false,
 };
 
-const reviewSlice = createSlice({
+const review_slice = createSlice({
   name: 'review',
   initialState,
   reducers: {},
@@ -52,4 +52,4 @@ const reviewSlice = createSlice({
   },
 });
 
-export const reviewReducer = reviewSlice.reducer;
+export const reviewReducer = review_slice.reducer;

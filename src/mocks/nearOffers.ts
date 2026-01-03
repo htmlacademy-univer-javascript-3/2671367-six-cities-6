@@ -1,5 +1,5 @@
 import { CityName } from '../entities/city';
-import { OfferDetails } from '../entities/offer/model/offerTypes';
+import { OfferDetails } from '../entities/offer/model/offer_types';
 
 export const nearOffersMoc: OfferDetails[] = [
   {

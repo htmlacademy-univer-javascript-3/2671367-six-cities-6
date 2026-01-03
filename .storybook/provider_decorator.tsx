@@ -1,7 +1,7 @@
 import { StoryContext, StoryFn } from '@storybook/react';
 import { StoreProvider } from '../src/app/providers/store';
 import { DeepPartial } from '@reduxjs/toolkit';
-import { StateSchema } from '../src/app/providers/store/model/stateInterfaces';
+import { StateSchema } from '../src/app/providers/store/model/state_interfaces';
 
 export interface ProviderDecoratorProps {
   initialState?: DeepPartial<StateSchema>;

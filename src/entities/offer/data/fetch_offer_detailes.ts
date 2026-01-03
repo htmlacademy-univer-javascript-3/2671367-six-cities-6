@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkConfig } from '../../../app/providers/store/model/stateInterfaces';
-import { OfferDetails } from '../model/offerTypes';
+import { ThunkConfig } from '../../../app/providers/store/model/state_interfaces';
+import { OfferDetails } from '../model/offer_types';
 import { ServerError } from '../../../interface/interface';
 
 export const fetchOfferDetalies = createAsyncThunk<

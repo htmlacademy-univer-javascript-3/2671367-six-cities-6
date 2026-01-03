@@ -9,7 +9,7 @@ import { getAuthorizationStatus } from '../../../user/model/userSelector';
 import { AuthorizationStatus } from '../../../../consts';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../../../consts';
-import { toggleFavoriteOffer } from '../../index';
+import { toggle_favorite_offer } from '../../index';
 
 interface OfferDetailsProps {
   offer: OfferDetails;
@@ -35,7 +35,7 @@ const OfferDetailsComponent = ({ offer, reviews }: OfferDetailsProps) => {
     setIsToggling(true);
     try {
       await dispatch(
-        toggleFavoriteOffer({ id: offer.id, status: offer.isFavorite ? 0 : 1 })
+        toggle_favorite_offer({ id: offer.id, status: offer.isFavorite ? 0 : 1 })
       ).unwrap();
     } catch (e) {
       // ignore

@@ -7,7 +7,7 @@ import {
 } from '../../../../shared/hooks/appHooks';
 import { getAuthorizationStatus } from '../../../user/model/userSelector';
 import { AuthorizationStatus, AppRoute } from '../../../../consts';
-import { toggleFavoriteOffer } from '../../index';
+import { toggle_favorite_offer } from '../../index';
 
 export interface ExtendedPlaceCardProps extends PlaceCardProps, VariantProps {
   onMouseEnter?: () => void;
@@ -37,7 +37,7 @@ export const OfferCard: FC<ExtendedPlaceCardProps> = ({
     setIsToggling(true);
     try {
       await dispatch(
-        toggleFavoriteOffer({ id: offer.id, status: offer.isFavorite ? 0 : 1 })
+        toggle_favorite_offer({ id: offer.id, status: offer.isFavorite ? 0 : 1 })
       ).unwrap();
     } catch (e) {
       // ignore here; UI will be re-enabled

@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 import type { AxiosInstance } from 'axios';
 import type { AnyAction } from '@reduxjs/toolkit';
-import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
-import { toggleFavoriteOffer } from './toggleFavoriteOffer';
+import type { ThunkExtraArg } from '../../../app/providers/store/model/state_interfaces';
+import { toggle_favorite_offer } from './toggle_favorite_offer';
 
-describe('toggleFavoriteOffer', () => {
+describe('toggle_favorite_offer', () => {
   const mockOffer = {
     id: '1',
     city: { name: 'Paris' },
@@ -20,12 +20,12 @@ describe('toggleFavoriteOffer', () => {
       errorHandler: vi.fn(),
     };
 
-    const thunk = toggleFavoriteOffer({ id: '1', status: 1 });
+    const thunk = toggle_favorite_offer({ id: '1', status: 1 });
 
     const result = (await thunk(vi.fn(), vi.fn(), extra)) as AnyAction;
 
     expect(mockApi.post).toHaveBeenCalledWith('/favorite/1/1');
-    expect(result.type).toBe(toggleFavoriteOffer.fulfilled.type);
+    expect(result.type).toBe(toggle_favorite_offer.fulfilled.type);
     expect(result.payload).toEqual(mockOffer);
   });
 
@@ -42,12 +42,12 @@ describe('toggleFavoriteOffer', () => {
       errorHandler: vi.fn().mockReturnValue(errorPayload),
     };
 
-    const thunk = toggleFavoriteOffer({ id: '1', status: 0 });
+    const thunk = toggle_favorite_offer({ id: '1', status: 0 });
 
     const result = (await thunk(vi.fn(), vi.fn(), extra)) as AnyAction;
 
     expect(mockApi.post).toHaveBeenCalledWith('/favorite/1/0');
-    expect(result.type).toBe(toggleFavoriteOffer.rejected.type);
+    expect(result.type).toBe(toggle_favorite_offer.rejected.type);
     expect(result.payload).toEqual(errorPayload);
   });
 });

@@ -6,8 +6,8 @@ import {
   useOfferSort,
   useSetOfferSort,
   useFavoriteOffersByCity,
-} from './offerHooks';
-import { offerActions } from '../model/offerSlice';
+} from './offer_hooks';
+import { offerActions } from '../model/offer_slice';
 import type { Offer } from '../index';
 import { CityName } from '../../city';
 
@@ -31,7 +31,7 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('offerHooks compact coverage', () => {
+describe('offer_hooks compact coverage', () => {
   it('useOfferSort returns value or undefined', () => {
     // нормальное значение
     mockedUseSelector.mockReturnValueOnce('price-asc');
@@ -77,7 +77,7 @@ describe('offerHooks compact coverage', () => {
   });
 
   it('useFavoriteOffersByCity handles all city cases', () => {
-    const favoriteOffers: Record<string, Offer[] | null> = {
+    const favorite_offers: Record<string, Offer[] | null> = {
       Paris: [
         {
           id: '1',
@@ -97,7 +97,7 @@ describe('offerHooks compact coverage', () => {
       ],
       Cologne: null,
     };
-    mockedUseSelector.mockReturnValue(favoriteOffers);
+    mockedUseSelector.mockReturnValue(favorite_offers);
 
     function Test1() {
       const offers = useFavoriteOffersByCity(CityName.Paris);

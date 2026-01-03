@@ -3,8 +3,8 @@ import { OFFER_FILTER_OPTIONS } from '../../entities/offer/constant/offer_consts
 import {
   useOfferSort,
   useSetOfferSort,
-} from '../../entities/offer/hooks/offerHooks';
-import { isOfferFilterType } from '../../entities/offer/util/filterOffers';
+} from '../../entities/offer/hooks/offer_hooks';
+import { isOfferFilterType } from '../../entities/offer/util/filter_offers';
 
 export const SortSelector = () => {
   const currentSort = useOfferSort();

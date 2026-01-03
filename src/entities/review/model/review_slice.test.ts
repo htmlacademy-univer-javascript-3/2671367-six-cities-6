@@ -1,7 +1,7 @@
-import { reviewReducer } from './reviewSlice';
-import { fetchOfferReviews } from '../data/fetchReview';
-import { createOfferReview } from '../data/createReview';
-import type { ReviewState } from './reviewState';
+import { reviewReducer } from './review_slice';
+import { fetchOfferReviews } from '../data/fetch_review';
+import { createOfferReview } from '../data/create_review';
+import type { ReviewState } from './review_state';
 import { reviews } from '../../../mocks/reviews';
 import { mockUnexpectedError } from '../../../setupTests';
 

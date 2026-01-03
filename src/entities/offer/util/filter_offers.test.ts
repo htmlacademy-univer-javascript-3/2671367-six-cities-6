@@ -1,26 +1,26 @@
 import { describe, it, expect } from 'vitest';
 import { offers } from '../../../mocks/offers';
-import { filterOffers, isOfferFilterType } from './filterOffers';
+import { filter_offers, isOfferFilterType } from './filter_offers';
 
-describe('filterOffers', () => {
+describe('filter_offers', () => {
   it('returns the same array for "popular-desc"', () => {
-    const result = filterOffers(offers, 'popular-desc');
+    const result = filter_offers(offers, 'popular-desc');
     expect(result).toEqual(offers);
     expect(result).not.toBe(offers);
   });
 
   it('sorts by price ascending', () => {
-    const result = filterOffers(offers, 'price-asc');
+    const result = filter_offers(offers, 'price-asc');
     expect(result.map((o) => o.id)).toEqual(['2', '1', '3', '4']);
   });
 
   it('sorts by price descending', () => {
-    const result = filterOffers(offers, 'price-desc');
+    const result = filter_offers(offers, 'price-desc');
     expect(result.map((o) => o.id)).toEqual(['4', '3', '1', '2']);
   });
 
   it('sorts by rating descending', () => {
-    const result = filterOffers(offers, 'top-desc');
+    const result = filter_offers(offers, 'top-desc');
     expect(result.map((o) => o.id)).toEqual(['4', '1', '3', '2']);
   });
 });

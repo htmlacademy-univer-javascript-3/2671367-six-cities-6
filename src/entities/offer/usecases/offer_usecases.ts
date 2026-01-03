@@ -5,7 +5,7 @@ import {
   getFavoriteOffers,
   getNearbyOffers,
   getOffer,
-} from '../model/offerSelector';
+} from '../model/offer_selector';
 
 export function useAvailableOffers() {
   return useSelector(getAvailableOffers);

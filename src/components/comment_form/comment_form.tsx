@@ -7,7 +7,7 @@ import { useAppSelector } from '../../shared/hooks/appHooks';
 import {
   getReviewsError,
   getReviewsLoading,
-} from '../../entities/review/model/reviewSelector';
+} from '../../entities/review/model/review_selector';
 
 const RATING_VALUES = [5, 4, 3, 2, 1];
 

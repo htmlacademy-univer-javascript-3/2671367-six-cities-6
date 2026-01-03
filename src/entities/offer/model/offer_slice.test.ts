@@ -1,12 +1,12 @@
-import { offerReducer, offerActions } from './offerSlice';
-import { fetchFavoriteOffers } from '../data/fetchFavoriteOffers';
-import { toggleFavoriteOffer } from '../data/toggleFavoriteOffer';
-import { fetchOffersByCity } from '../data/fetchOffersByCity';
-import { fetchOfferDetalies } from '../data/fetchOfferDetailes';
-import { fetchNearOffersByCity } from '../data/fetchNearOffers';
+import { offerReducer, offerActions } from './offer_slice';
+import { fetch_favorite_offers } from '../data/fetch_favorite_offers';
+import { toggle_favorite_offer } from '../data/toggle_favorite_offer';
+import { fetch_offers_by_city } from '../data/fetch_offers_by_city';
+import { fetchOfferDetalies } from '../data/fetch_offer_detailes';
+import { fetchNearOffersByCity } from '../data/fetch_near_offers';
 import { logout } from '../../user/data/logoutUser';
-import type { OfferState } from './offerState';
-import type { OfferDetails } from './offerTypes';
+import type { OfferState } from './offer_state';
+import type { OfferDetails } from './offer_types';
 import { CityName } from '../../city';
 
 describe('offer reducer', () => {
@@ -28,15 +28,15 @@ describe('offer reducer', () => {
     expect(state.availableOffers).toEqual([]);
     expect(state.nearbyOffers).toEqual([]);
     expect(state.offer).toBeNull();
-    expect(state.favoriteOffers).toEqual({});
+    expect(state.favorite_offers).toEqual({});
     expect(state.favoriteCount).toBe(0);
     expect(state.filterBy).toBe('popular-desc');
   });
 
-  it('should set availableOffers on fetchOffersByCity.fulfilled', () => {
+  it('should set availableOffers on fetch_offers_by_city.fulfilled', () => {
     const next = offerReducer(
       undefined,
-      fetchOffersByCity.fulfilled([parisOffer], '', CityName.Paris)
+      fetch_offers_by_city.fulfilled([parisOffer], '', CityName.Paris)
     );
 
     expect(next.availableOffers).toEqual([parisOffer]);
@@ -63,7 +63,7 @@ describe('offer reducer', () => {
     expect(next.nearbyOffers).toEqual([parisOffer]);
   });
 
-  it('should set favoriteOffers and favoriteCount on fetchFavoriteOffers.fulfilled', () => {
+  it('should set favorite_offers and favoriteCount on fetch_favorite_offers.fulfilled', () => {
     const payload = {
       Paris: [parisOffer],
       Amsterdam: [amsterdamOffer],
@@ -71,48 +71,48 @@ describe('offer reducer', () => {
 
     const next = offerReducer(
       undefined,
-      fetchFavoriteOffers.fulfilled(payload, '', undefined)
+      fetch_favorite_offers.fulfilled(payload, '', undefined)
     );
 
-    expect(next.favoriteOffers).toEqual(payload);
+    expect(next.favorite_offers).toEqual(payload);
     expect(next.favoriteCount).toBe(2);
   });
 
-  it('should add offer to favorites on toggleFavoriteOffer.fulfilled with status = 1', () => {
+  it('should add offer to favorites on toggle_favorite_offer.fulfilled with status = 1', () => {
     const next = offerReducer(
       undefined,
-      toggleFavoriteOffer.fulfilled(parisOffer, '', {
+      toggle_favorite_offer.fulfilled(parisOffer, '', {
         id: '1',
         status: 1,
       })
     );
 
-    expect(next.favoriteOffers['Paris']).toHaveLength(1);
-    expect(next.favoriteOffers['Paris']![0].id).toBe('1');
+    expect(next.favorite_offers['Paris']).toHaveLength(1);
+    expect(next.favorite_offers['Paris']![0].id).toBe('1');
     expect(next.favoriteCount).toBe(1);
   });
 
-  it('should remove offer from favorites on toggleFavoriteOffer.fulfilled with status = 0', () => {
+  it('should remove offer from favorites on toggle_favorite_offer.fulfilled with status = 0', () => {
     const startState: OfferState = {
       availableOffers: [],
       nearbyOffers: [],
       offer: null,
       filterBy: 'popular-desc',
       favoriteCount: 1,
-      favoriteOffers: {
+      favorite_offers: {
         Paris: [parisOffer],
       },
     };
 
     const next = offerReducer(
       startState,
-      toggleFavoriteOffer.fulfilled(parisOffer, '', {
+      toggle_favorite_offer.fulfilled(parisOffer, '', {
         id: '1',
         status: 0,
       })
     );
 
-    expect(next.favoriteOffers['Paris']).toEqual([]);
+    expect(next.favorite_offers['Paris']).toEqual([]);
     expect(next.favoriteCount).toBe(0);
   });
 
@@ -121,14 +121,14 @@ describe('offer reducer', () => {
       availableOffers: [{ ...parisOffer }],
       nearbyOffers: [{ ...parisOffer }],
       offer: null,
-      favoriteOffers: {},
+      favorite_offers: {},
       favoriteCount: 0,
       filterBy: 'popular-desc',
     };
 
     const next = offerReducer(
       startState,
-      toggleFavoriteOffer.fulfilled({ ...parisOffer, isFavorite: true }, '', {
+      toggle_favorite_offer.fulfilled({ ...parisOffer, isFavorite: true }, '', {
         id: '1',
         status: 1,
       })
@@ -143,14 +143,14 @@ describe('offer reducer', () => {
       availableOffers: [],
       nearbyOffers: [],
       offer: { ...parisOffer, isFavorite: false },
-      favoriteOffers: {},
+      favorite_offers: {},
       favoriteCount: 0,
       filterBy: 'popular-desc',
     };
 
     const next = offerReducer(
       startState,
-      toggleFavoriteOffer.fulfilled({ ...parisOffer, isFavorite: true }, '', {
+      toggle_favorite_offer.fulfilled({ ...parisOffer, isFavorite: true }, '', {
         id: '1',
         status: 1,
       })
@@ -164,7 +164,7 @@ describe('offer reducer', () => {
       availableOffers: [{ ...parisOffer, isFavorite: true }],
       nearbyOffers: [{ ...parisOffer, isFavorite: true }],
       offer: { ...parisOffer, isFavorite: true },
-      favoriteOffers: { Paris: [parisOffer] },
+      favorite_offers: { Paris: [parisOffer] },
       favoriteCount: 1,
       filterBy: 'popular-desc',
     };
@@ -174,7 +174,7 @@ describe('offer reducer', () => {
       logout.fulfilled(undefined, '', undefined)
     );
 
-    expect(next.favoriteOffers).toEqual({});
+    expect(next.favorite_offers).toEqual({});
     expect(next.favoriteCount).toBe(0);
     expect(next.availableOffers[0].isFavorite).toBe(false);
     expect(next.nearbyOffers[0].isFavorite).toBe(false);

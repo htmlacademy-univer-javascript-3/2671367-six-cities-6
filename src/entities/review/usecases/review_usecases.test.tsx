@@ -6,7 +6,7 @@ import {
   useReviewsByOffer,
   useReviewsLoading,
   useReviewsError,
-} from './reviewUsecases';
+} from './review_usecases';
 
 vi.mock('react-redux', async () => {
   const actual = await vi.importActual<typeof redux>('react-redux');

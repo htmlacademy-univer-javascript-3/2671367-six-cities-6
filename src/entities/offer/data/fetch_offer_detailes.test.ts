@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import type { AxiosInstance } from 'axios';
 import type { AnyAction } from '@reduxjs/toolkit';
-import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
+import type { ThunkExtraArg } from '../../../app/providers/store/model/state_interfaces';
 
-import { OfferDetails } from '../model/offerTypes';
+import { OfferDetails } from '../model/offer_types';
 import { fetchOfferDetalies } from '..';
 import { offers } from '../../../mocks/offers';
 

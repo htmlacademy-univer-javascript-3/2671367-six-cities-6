@@ -16,7 +16,7 @@ import {
 } from '../entities/offer';
 import { useAppDispatch } from '../shared/hooks/appHooks';
 import { fetchOfferReviews, ReviewList } from '../entities/review';
-import { useReviewsByOffer } from '../entities/review/usecases/reviewUsecases';
+import { useReviewsByOffer } from '../entities/review/usecases/review_usecases';
 
 const OfferPage: FC = () => {
   const offer = useOffer();

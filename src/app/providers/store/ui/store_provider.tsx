@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { StateSchema } from '../model/stateInterfaces';
+import { StateSchema } from '../model/state_interfaces';
 import { ReactNode, useMemo } from 'react';
 import { DeepPartial } from '@reduxjs/toolkit';
 import { createReduxStore } from '../model/config';

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { OfferDetails } from '../model/offerTypes';
-import { ThunkConfig } from '../../../app/providers/store/model/stateInterfaces';
+import { OfferDetails } from '../model/offer_types';
+import { ThunkConfig } from '../../../app/providers/store/model/state_interfaces';
 import { ServerError } from '../../../interface/interface';
 
 interface Args {
@@ -8,11 +8,11 @@ interface Args {
   status: 0 | 1;
 }
 
-export const toggleFavoriteOffer = createAsyncThunk<
+export const toggle_favorite_offer = createAsyncThunk<
   OfferDetails,
   Args,
   ThunkConfig<ServerError>
->('offer/toggleFavoriteOffer', async ({ id, status }, thunkAPI) => {
+>('offer/toggle_favorite_offer', async ({ id, status }, thunkAPI) => {
   const { rejectWithValue, extra } = thunkAPI;
   try {
     const response = await extra.api.post<OfferDetails>(

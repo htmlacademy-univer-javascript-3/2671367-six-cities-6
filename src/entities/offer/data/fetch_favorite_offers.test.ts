@@ -2,11 +2,11 @@ import { describe, it, expect, vi } from 'vitest';
 import type { AxiosInstance } from 'axios';
 import type { AnyAction } from '@reduxjs/toolkit';
 import { CityName } from '../../city';
-import { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
-import { fetchFavoriteOffers, Offer } from '..';
+import { ThunkExtraArg } from '../../../app/providers/store/model/state_interfaces';
+import { fetch_favorite_offers, Offer } from '..';
 import { offers } from '../../../mocks/offers';
 
-describe('fetchFavoriteOffers', () => {
+describe('fetch_favorite_offers', () => {
   const mockOffer: Offer = offers[0];
 
   it('should successfully fetch and group favorite offers by city', async () => {
@@ -37,12 +37,12 @@ describe('fetchFavoriteOffers', () => {
       errorHandler: vi.fn(),
     };
 
-    const thunk = fetchFavoriteOffers();
+    const thunk = fetch_favorite_offers();
 
     const result = (await thunk(vi.fn(), vi.fn(), extra)) as AnyAction;
 
     expect(mockApi.get).toHaveBeenCalledWith('/favorite');
-    expect(result.type).toBe(fetchFavoriteOffers.fulfilled.type);
+    expect(result.type).toBe(fetch_favorite_offers.fulfilled.type);
     expect(result.payload).toEqual({
       [CityName.Paris]: [mockOffers[0], mockOffers[1]],
       [CityName.Cologne]: [mockOffers[2]],
@@ -59,13 +59,13 @@ describe('fetchFavoriteOffers', () => {
       errorHandler: vi.fn(),
     };
 
-    const result = (await fetchFavoriteOffers()(
+    const result = (await fetch_favorite_offers()(
       vi.fn(),
       vi.fn(),
       extra
     )) as AnyAction;
 
-    expect(result.type).toBe(fetchFavoriteOffers.fulfilled.type);
+    expect(result.type).toBe(fetch_favorite_offers.fulfilled.type);
     expect(result.payload).toEqual({});
   });
 
@@ -83,13 +83,13 @@ describe('fetchFavoriteOffers', () => {
       errorHandler: vi.fn().mockReturnValue(errorPayload),
     };
 
-    const result = (await fetchFavoriteOffers()(
+    const result = (await fetch_favorite_offers()(
       vi.fn(),
       vi.fn(),
       extra
     )) as AnyAction;
 
-    expect(result.type).toBe(fetchFavoriteOffers.rejected.type);
+    expect(result.type).toBe(fetch_favorite_offers.rejected.type);
     expect(result.payload).toEqual(errorPayload);
   });
 });
