@@ -15,7 +15,7 @@ import * as filterUtils from '../util/filter-offers';
 
 const mockLocation = { search: '' };
 vi.stubGlobal('window', { location: mockLocation });
-vi.mock('../util/filter_offers');
+vi.mock('../util/filter-offers');
 
 const mockedIsOfferFilterType = vi.mocked(filterUtils.isOfferFilterType);
 const mockedFilterOffers = vi.mocked(filterUtils.filterOffers);

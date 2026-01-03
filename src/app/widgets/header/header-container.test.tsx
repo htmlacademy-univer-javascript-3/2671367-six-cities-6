@@ -13,9 +13,9 @@ import {
   mockedUseAppSelector,
 } from '../../../setup-tests';
 
-vi.mock('../../../entities/offer/hooks/offer_hooks', async () => {
+vi.mock('../../../entities/offer/hooks/offer-hooks', async () => {
   const actual = await vi.importActual<typeof offerHooks>(
-    '../../../entities/offer/hooks/offer_hooks'
+    '../../../entities/offer/hooks/offer-hooks'
   );
   return {
     ...actual,

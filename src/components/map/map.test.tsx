@@ -8,12 +8,24 @@ vi.mock('../../shared/hooks/useMap', () => ({
 }));
 
 vi.mock('leaflet', () => {
+  class MockMap {
+    setView = vi.fn().mockReturnThis();
+    addLayer = vi.fn();
+    removeLayer = vi.fn();
+    constructor() {}
+  }
+
   class Marker {
     addTo = vi.fn();
     constructor() {}
   }
 
   class Icon {
+    constructor() {}
+  }
+
+  class TileLayer {
+    addTo = vi.fn();
     constructor() {}
   }
 
@@ -24,10 +36,17 @@ vi.mock('leaflet', () => {
     };
   }
 
+  function tileLayer() {
+    return new TileLayer();
+  }
+
   return {
+    Map: MockMap,
     Marker,
     Icon,
+    TileLayer,
     layerGroup,
+    tileLayer,
   };
 });
 

@@ -2,17 +2,17 @@ import { render, screen, waitFor } from '@testing-library/react';
 import RouterRoot from './router-root';
 import { vi } from 'vitest';
 
-vi.mock('../../../pages/mainPage', () => ({ default: () => <div>Main</div> }));
-vi.mock('../../../pages/loginPage', () => ({
+vi.mock('../../../pages/main-page', () => ({ default: () => <div>Main</div> }));
+vi.mock('../../../pages/login-page', () => ({
   default: () => <div>Login</div>,
 }));
-vi.mock('../../../pages/favoritesPage', () => ({
+vi.mock('../../../pages/favorites-page', () => ({
   default: () => <div>Favorites</div>,
 }));
-vi.mock('../../../pages/offerPage', () => ({
+vi.mock('../../../pages/offer-page', () => ({
   default: () => <div>Offer</div>,
 }));
-vi.mock('../../../pages/notFoundPage', () => ({
+vi.mock('../../../pages/not-found-page', () => ({
   default: () => <div>NotFound</div>,
 }));
 

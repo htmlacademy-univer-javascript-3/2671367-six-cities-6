@@ -13,7 +13,7 @@ vi.mock('../review/review', () => ({
   ),
 }));
 
-vi.mock('../../../../components/comment_form/comment_form', () => ({
+vi.mock('../../../../components/comment-form/comment-form', () => ({
   CommentForm: ({ offerId }: { offerId: string }) => (
     <div data-testid="comment-form">{offerId}</div>
   ),

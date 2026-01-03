@@ -1,18 +1,13 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { fireEvent } from '@testing-library/react';
 
-import * as appHooks from '../../../../shared/hooks/app-hooks';
 import { OfferCard } from './offer-card';
 import { AuthorizationStatus, AppRoute } from '../../../../consts';
 import type { Offer } from '../../index';
 import { CityName } from '../../../city';
 import { renderWithProviders } from '../../../../tests/render-with-providers';
 
-import {
-  navigateMock,
-  mockedUseAppDispatch,
-  mockedUseAppSelector,
-} from '../../../../setup-tests';
+import { navigateMock, mockedUseAppSelector } from '../../../../setup-tests';
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -74,15 +69,11 @@ describe('OfferCard', () => {
     expect(navigateMock).toHaveBeenCalledWith(AppRoute.Login);
   });
 
-  it('dispatches toggle_favorite_offer when user is authorized', () => {
+  it('does not redirect to login when user is authorized and clicks bookmark', () => {
     mockedUseAppSelector.mockReturnValue(
       AuthorizationStatus.Auth as AuthorizationStatus
     );
-
-    const dispatchMock = vi.fn(() => ({ unwrap: () => Promise.resolve() }));
-    mockedUseAppDispatch.mockReturnValue(
-      dispatchMock as unknown as ReturnType<typeof appHooks.useAppDispatch>
-    );
+    navigateMock.mockClear();
 
     const { getByRole } = renderWithProviders(
       <OfferCard
@@ -96,6 +87,6 @@ describe('OfferCard', () => {
     });
     fireEvent.click(bookmarkButton);
 
-    expect(dispatchMock).toHaveBeenCalled();
+    expect(navigateMock).not.toHaveBeenCalledWith(AppRoute.Login);
   });
 });

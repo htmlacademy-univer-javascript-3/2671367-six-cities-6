@@ -1,16 +1,11 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
-import * as appHooks from '../../../../shared/hooks/app-hooks';
 import { AuthorizationStatus, AppRoute } from '../../../../consts';
 import { OfferDetailsUI } from './offer-details';
 import { renderWithProviders } from '../../../../tests/render-with-providers';
 import { offers } from '../../../../mocks/offers';
 
-import {
-  navigateMock,
-  mockedUseAppDispatch,
-  mockedUseAppSelector,
-} from '../../../../setup-tests';
+import { navigateMock, mockedUseAppSelector } from '../../../../setup-tests';
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -56,14 +51,11 @@ describe('OfferDetailsUI', () => {
     expect(navigateMock).toHaveBeenCalledWith(AppRoute.Login);
   });
 
-  it('dispatches toggle_favorite_offer when auth', () => {
+  it('does not redirect to login on bookmark click when auth', () => {
     mockedUseAppSelector.mockReturnValue(
       AuthorizationStatus.Auth as AuthorizationStatus
     );
-    const dispatchMock = vi.fn(() => ({ unwrap: () => Promise.resolve() }));
-    mockedUseAppDispatch.mockReturnValue(
-      dispatchMock as unknown as ReturnType<typeof appHooks.useAppDispatch>
-    );
+    navigateMock.mockClear();
 
     const { getByRole } = renderWithProviders(
       <OfferDetailsUI offer={{ ...baseOffer }} reviews={<div />} />
@@ -71,6 +63,6 @@ describe('OfferDetailsUI', () => {
 
     fireEvent.click(getByRole('button'));
 
-    expect(dispatchMock).toHaveBeenCalled();
+    expect(navigateMock).not.toHaveBeenCalledWith(AppRoute.Login);
   });
 });

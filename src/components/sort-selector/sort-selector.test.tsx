@@ -3,9 +3,9 @@ import { render, fireEvent, within } from '@testing-library/react';
 import * as offerHooks from '../../entities/offer/hooks/offer-hooks';
 import { SortSelector } from './sort-selector';
 
-vi.mock('../../entities/offer/hooks/offer_hooks', async () => {
+vi.mock('../../entities/offer/hooks/offer-hooks', async () => {
   const actual = await vi.importActual<typeof offerHooks>(
-    '../../entities/offer/hooks/offer_hooks'
+    '../../entities/offer/hooks/offer-hooks'
   );
   return {
     ...actual,

@@ -19,9 +19,9 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
-vi.mock('../src/shared/hooks/appHooks', async () => {
+vi.mock('./shared/hooks/app-hooks', async () => {
   const actual = await vi.importActual<typeof appHooks>(
-    '../src/shared/hooks/appHooks'
+    './shared/hooks/app-hooks'
   );
 
   return {

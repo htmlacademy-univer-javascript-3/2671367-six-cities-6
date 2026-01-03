@@ -8,7 +8,7 @@ import {
   useOffer,
   useFavoriteOffers,
   useFavoriteCount,
-} from './offerUsecases';
+} from './offer-usecases';
 import * as selectors from '../model/offer-selector';
 
 vi.mock('react-redux', async () => {
