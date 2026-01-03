@@ -33,7 +33,7 @@ vi.mock('leaflet', () => {
 
 import Map from './map';
 import { offers } from '../../mocks/offers';
-import { renderWithProviders } from '../../tests/renderWithProviders';
+import { renderWithProviders } from '../../tests/render-with-providers';
 
 afterEach(() => vi.clearAllMocks());
 

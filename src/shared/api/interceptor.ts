@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-import { getAccessToken, removeAccessToken } from './authToken';
+import { getAccessToken, removeAccessToken } from './auth-token';
 import { AppRoute } from '../../consts';
 
 const PUBLIC_ROUTES = [AppRoute.Login, AppRoute.Root];

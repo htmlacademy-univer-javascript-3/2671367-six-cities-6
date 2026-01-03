@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { checkAuth } from '../entities/user/data/checkUserAuth';
-import { useAppDispatch } from '../shared/hooks/appHooks';
-import RoutRoot from './providers/router/router_root';
+import { checkAuth } from '../entities/user/data/check-user-auth';
+import { useAppDispatch } from '../shared/hooks/app-hooks';
+import RoutRoot from './providers/router/router-root';
 
 const App = () => {
   const dispatch = useAppDispatch();

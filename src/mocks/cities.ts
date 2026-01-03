@@ -1,5 +1,5 @@
-import { CityName } from '../entities/city/constant/city_consts';
-import { City } from '../entities/city/model/city_types';
+import { CityName } from '../entities/city/constant/city-consts';
+import { City } from '../entities/city/model/city-types';
 import { Location } from '../entities/location/model/location_types';
 
 const locations: Location[] = [

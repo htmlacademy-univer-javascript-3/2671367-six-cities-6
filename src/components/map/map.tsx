@@ -3,8 +3,8 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import { MapProps } from '../../interface/interface';
-import useMap from '../../shared/hooks/useMap';
-import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from './mapConst';
+import useMap from '../../shared/hooks/use-map';
+import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from './map-const';
 
 const defaultIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
