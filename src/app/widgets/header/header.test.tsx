@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { fireEvent } from '@testing-library/react';
 import { Header } from './header';
-import { renderWithProviders } from '../../../tests/renderWithProviders';
+import { renderWithProviders } from '../../../tests/render-with-providers';
 
 afterEach(() => vi.clearAllMocks());
 

@@ -1,6 +1,6 @@
-import { CityName } from '../entities/city/constant/cityConsts';
-import { City } from '../entities/city/model/cityTypes';
-import { Location } from '../entities/location/model/locationTypes';
+import { CityName } from '../entities/city/constant/city-consts';
+import { City } from '../entities/city/model/city-types';
+import { Location } from '../entities/location/model/location_types';
 
 const locations: Location[] = [
   { latitude: 48.864716, longitude: 2.349014 },

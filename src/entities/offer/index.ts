@@ -1,13 +1,13 @@
-export type { OfferType, Offer, OfferDetails } from './model/offerTypes';
+export type { OfferType, Offer, OfferDetails } from './model/offer-types.ts';
 
-export { offerReducer } from './model/offerSlice';
-export type { OfferState } from './model/offerState';
+export { offerReducer } from './model/offer-slice.ts';
+export type { OfferState } from './model/offer-state.ts';
 
 export {
   getAvailableOffers,
   getOffer,
   getNearbyOffers,
-} from './model/offerSelector';
+} from './model/offer-selector.ts';
 
 export {
   useAvailableOffers,
@@ -15,16 +15,16 @@ export {
   useOffer,
   useFavoriteOffers,
   useFavoriteCount,
-} from './usecases/offerUsecases';
+} from './usecases/offer-usecases.ts';
 
-export { fetchOffersByCity } from './data/fetchOffersByCity';
-export { fetchNearOffersByCity } from './data/fetchNearOffers';
-export { fetchOfferDetalies } from './data/fetchOfferDetailes';
-export { fetchFavoriteOffers } from './data/fetchFavoriteOffers';
-export { toggleFavoriteOffer } from './data/toggleFavoriteOffer';
+export { fetchOffersByCity } from './data/fetch-offers-by-city.ts';
+export { fetchNearOffersByCity } from './data/fetch-near-offers.ts';
+export { fetchOfferDetalies } from './data/fetch-offer-detailes.ts';
+export { fetchFavoriteOffers } from './data/fetch-favorite-offers.ts';
+export { toggleFavoriteOffer } from './data/toggle-favorite-offer.ts';
 
-export { OFFER_FILTER_OPTIONS } from './constant/offerConsts';
+export { OFFER_FILTER_OPTIONS } from './constant/offer-consts.ts';
 
-export { OfferCard } from './components/offerCard/offerCard.tsx';
-export { OffersList } from './components/offersList/offersList.tsx';
-export { OfferDetailsUI } from './components/offerDetails/offerDetails.tsx';
+export { OfferCard } from './components/offer-card/offer-card.tsx';
+export { OffersList } from './components/offers-list/offers-list.tsx';
+export { OfferDetailsUI } from './components/offer-details/offer-details.tsx';

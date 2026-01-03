@@ -1,5 +1,5 @@
 import { CityName } from '../entities/city';
-import { OfferDetails } from '../entities/offer/model/offerTypes';
+import { OfferDetails } from '../entities/offer/model/offer-types';
 
 export const offers: OfferDetails[] = [
   {

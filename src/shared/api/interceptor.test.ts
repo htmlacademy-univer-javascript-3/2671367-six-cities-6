@@ -4,7 +4,7 @@ import axios, {
   type AxiosError,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import * as authToken from './authToken';
+import * as authToken from './auth-token';
 import { AppRoute } from '../../consts';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import {

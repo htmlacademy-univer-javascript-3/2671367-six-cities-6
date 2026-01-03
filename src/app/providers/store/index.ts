@@ -1,3 +1,3 @@
-export type { StateSchema, ThunkConfig } from './model/stateInterfaces';
-export type { AppDispatch } from './model/stateTypes';
-export { StoreProvider } from './ui/storeProvider';
+export type { StateSchema, ThunkConfig } from './model/state-interfaces';
+export type { AppDispatch } from './model/state-types';
+export { StoreProvider } from './ui/store-provider';
