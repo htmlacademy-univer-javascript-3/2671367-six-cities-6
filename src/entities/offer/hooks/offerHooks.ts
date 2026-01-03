@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { offerActions } from '../model/offerSlice';
-import { OfferFilterType } from '../constant/offerConsts';
+import { OfferFilterType } from '../constant/offer_consts';
 
 import { StateSchema } from '../../../app/providers/store';
 import { Offer, OfferState } from '..';

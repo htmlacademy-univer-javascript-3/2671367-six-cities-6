@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { CitiesList } from '../components/citiesList/citiesList';
-import { SortSelector } from '../components/sortSelector/sortSelector';
+import { CitiesList } from '../components/cities_list/cities_ist';
+import { SortSelector } from '../components/sort_selector/sort_selector';
 import { useCityName } from '../entities/city';
 import {
   useAvailableOffers,
@@ -8,12 +8,12 @@ import {
   OffersList,
 } from '../entities/offer';
 import { cities } from '../mocks/cities';
-import { useSetCity } from '../entities/city/hook/cityHooks';
+import { useSetCity } from '../entities/city/hook/city_hooks';
 import { useAppDispatch } from '../shared/hooks/appHooks';
-import { CityMap } from '../app/widgets/cityMap/cityMap';
-import CitiesNoPlaces from '../components/citiesNoPlaces/citiesNoPlaces';
+import { CityMap } from '../app/widgets/city_map/city_map';
+import CitiesNoPlaces from '../components/cities_no_places/cities_no_places';
 
-import { HeaderContainer } from '../app/widgets/header/headerContainer';
+import { HeaderContainer } from '../app/widgets/header/header_container';
 import { useOfferSort } from '../entities/offer/hooks/offerHooks';
 import { filterOffers } from '../entities/offer/util/filterOffers';
 

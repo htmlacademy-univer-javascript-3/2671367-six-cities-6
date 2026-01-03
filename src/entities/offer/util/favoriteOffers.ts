@@ -1,4 +1,4 @@
-import { CityName } from '../../city/constant/cityConsts';
+import { CityName } from '../../city/constant/city_consts';
 import { Offer } from '../model/offerTypes';
 
 export function toggleFavoriteOffers(offers: Offer[], id: string) {

@@ -1,1 +1,1 @@
-export type { Location } from './model/locationTypes';
+export type { Location } from './model/location_types';

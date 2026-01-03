@@ -11,4 +11,4 @@ export {
 } from './model/reviewSelector';
 
 export { ReviewComnponent } from './components/review/review.tsx';
-export { ReviewList } from './components/rewievList/reviewList.tsx';
+export { ReviewList } from './components/rewievList/review_list.tsx';

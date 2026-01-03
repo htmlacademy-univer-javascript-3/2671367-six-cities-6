@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CityName } from '../../city/constant/cityConsts';
+import { CityName } from '../../city/constant/city_consts';
 import { Offer } from '../model/offerTypes';
 import { ThunkConfig } from '../../../app/providers/store/model/stateInterfaces';
 import { ServerError } from '../../../interface/interface';

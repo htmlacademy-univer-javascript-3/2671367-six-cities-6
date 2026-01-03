@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { LoginForm } from '../components/loginForm/loginForm';
+import { LoginForm } from '../components/login_form/login_form';
 
 const LoginPage: FC = () => (
   <div className="page page--gray page--login">

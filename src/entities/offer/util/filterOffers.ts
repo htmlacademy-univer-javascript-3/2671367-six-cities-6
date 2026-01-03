@@ -1,4 +1,4 @@
-import { OfferFilterType, offerFilterValues } from '../constant/offerConsts';
+import { OfferFilterType, offerFilterValues } from '../constant/offer_consts';
 import { Offer } from '../model/offerTypes';
 
 const sortFunctions: Record<

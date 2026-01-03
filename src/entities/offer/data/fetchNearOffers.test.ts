@@ -4,7 +4,7 @@ import type { AnyAction } from '@reduxjs/toolkit';
 import type { ThunkExtraArg } from '../../../app/providers/store/model/stateInterfaces';
 
 import { fetchNearOffersByCity } from '..';
-import { CityName } from '../../city/constant/cityConsts';
+import { CityName } from '../../city/constant/city_consts';
 import type { Offer } from '../model/offerTypes';
 import { offers } from '../../../mocks/offers';
 

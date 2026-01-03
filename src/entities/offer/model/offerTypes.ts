@@ -1,6 +1,6 @@
-import { City } from '../../city/model/cityTypes';
+import { City } from '../../city/model/city_types';
 import { User } from '../../user/model/userTypes';
-import { Location } from '../../location/model/locationTypes';
+import { Location } from '../../location/model/location_types';
 
 export type OfferType = 'Apartment' | 'Private room' | 'House' | 'Hotel';
 

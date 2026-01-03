@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OfferState } from './offerState';
-import { OfferFilterType } from '../constant/offerConsts';
+import { OfferFilterType } from '../constant/offer_consts';
 import { fetchOffersByCity } from '../data/fetchOffersByCity';
 import { fetchOfferDetalies } from '../data/fetchOfferDetailes';
 import { fetchNearOffersByCity } from '../data/fetchNearOffers';

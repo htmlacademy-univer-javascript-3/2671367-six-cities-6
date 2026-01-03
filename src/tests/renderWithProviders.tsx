@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 
-import { RootState } from '../app/providers/store/model/stateTypes';
+import { RootState } from '../app/providers/store/model/state_types';
 import { reducers } from '../app/providers/store/model/reducer';
 
 interface RenderOptions {

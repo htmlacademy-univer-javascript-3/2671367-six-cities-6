@@ -1,10 +1,10 @@
-export type { City } from './model/cityTypes';
-export type { CityState } from './model/cityState';
+export type { City } from './model/city_types';
+export type { CityState } from './model/city_state';
 
-export { CityName } from './constant/cityConsts';
-export { CITY_LOCATIONS } from './constant/cityConsts';
+export { CityName } from './constant/city_consts';
+export { CITY_LOCATIONS } from './constant/city_consts';
 
-export { cityReducer, cityActions } from './model/citySlice';
+export { cityReducer, cityActions } from './model/city_slice';
 
-export { getCityName } from './model/citySelector';
-export { useCityName } from './usecases/cityUsecases';
+export { getCityName } from './model/city_selector';
+export { useCityName } from './usecases/city_usecases';

@@ -2,13 +2,13 @@ import { FC, useEffect } from 'react';
 
 import { useFavoriteOffersByCity } from '../entities/offer/hooks/offerHooks';
 
-import { HeaderContainer } from '../app/widgets/header/headerContainer';
+import { HeaderContainer } from '../app/widgets/header/header_container';
 import { fetchOffersByCity, OffersList } from '../entities/offer';
-import FavoritesEmpty from '../components/favoritesEmpty/favoritesEmpty';
+import FavoritesEmpty from '../components/favorites_empty/favorites_empty';
 import { useCityName } from '../entities/city';
-import { useSetCity } from '../entities/city/hook/cityHooks';
+import { useSetCity } from '../entities/city/hook/city_hooks';
 import { cities } from '../mocks/cities';
-import { CitiesList } from '../components/citiesList/citiesList';
+import { CitiesList } from '../components/cities_list/cities_ist';
 import { useAppDispatch } from '../shared/hooks/appHooks';
 
 const FavoritesPage: FC = () => {

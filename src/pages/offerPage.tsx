@@ -4,10 +4,10 @@ import {
   useNearOffers,
   useOffer,
 } from '../entities/offer/usecases/offerUsecases';
-import { CityMap } from '../app/widgets/cityMap/cityMap';
+import { CityMap } from '../app/widgets/city_map/city_map';
 
-import { HeaderContainer } from '../app/widgets/header/headerContainer';
-import { OfferDetailsUI } from '../entities/offer/components/offerDetails/offerDetails';
+import { HeaderContainer } from '../app/widgets/header/header_container';
+import { OfferDetailsUI } from '../entities/offer/components/offer_details/offer_details;
 import { useParams } from 'react-router-dom';
 import {
   fetchNearOffersByCity,

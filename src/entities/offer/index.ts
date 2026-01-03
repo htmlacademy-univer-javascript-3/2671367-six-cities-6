@@ -23,8 +23,8 @@ export { fetchOfferDetalies } from './data/fetchOfferDetailes';
 export { fetchFavoriteOffers } from './data/fetchFavoriteOffers';
 export { toggleFavoriteOffer } from './data/toggleFavoriteOffer';
 
-export { OFFER_FILTER_OPTIONS } from './constant/offerConsts';
+export { OFFER_FILTER_OPTIONS } from './constant/offer_consts.ts';
 
-export { OfferCard } from './components/offerCard/offerCard.tsx';
-export { OffersList } from './components/offersList/offersList.tsx';
-export { OfferDetailsUI } from './components/offerDetails/offerDetails.tsx';
+export { OfferCard } from './components/offer_card/offer_card.tsx';
+export { OffersList } from './components/offers_list/offers_list.tsx';
+export { OfferDetailsUI } from './components/offer_details/offer_details.tsx';

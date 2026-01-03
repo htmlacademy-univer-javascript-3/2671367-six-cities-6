@@ -1,5 +1,5 @@
-import { CityName } from '../../city/constant/cityConsts';
-import { OfferFilterType } from '../constant/offerConsts';
+import { CityName } from '../../city/constant/city_consts';
+import { OfferFilterType } from '../constant/offer_consts';
 import { Offer, OfferDetails } from './offerTypes';
 
 export interface OfferState {
